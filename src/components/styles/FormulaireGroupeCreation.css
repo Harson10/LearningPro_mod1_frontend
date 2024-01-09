@@ -1,0 +1,193 @@
+.form_groupe_creation {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 15px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../images/bg_landing_page.jpeg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat:no-repeat ;
+  font-family: sans-serif;
+  z-index: 1;
+}
+
+.retour_tBord{
+  position: absolute;
+  top: 12.25px;
+  left: 30px;
+  width: 200px;
+  height: 50px;
+  border-radius: 30px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+  transition: 0.3s ease-out;
+  z-index: 1;
+}
+
+.retour_tBord:hover {
+  scale: 1.1;
+}
+
+.retour_tBord button {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background: linear-gradient(135deg,  #54a576, #48765b);
+}
+
+.FormulaireCreerGroupe {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 27%;
+  height: 40%;
+  padding-top: 8%;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(139, 255, 230, 0.634), rgba(117, 206, 93, 0.614));
+  box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.1);
+}
+ 
+.titre_creation_gorupe {
+  position: absolute;
+  top: 12%;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+input {
+  width: 80%;
+  height: auto;
+  padding: 8px;
+  margin: 0 10px;
+  text-align: center;
+  border: none;
+  border-radius: 30px;
+  font-size: 1em;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+}
+
+form input:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 1em rgb(32, 255, 54);
+  font-size: 1em;
+}
+
+select:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 1em rgb(32, 255, 54);
+  font-size: 1em;
+}
+
+.boutton_inscription {
+  outline: none;
+  cursor: pointer;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+  padding: 8px;
+  margin: 0 5px 15px 5px;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+  border: 1px solid white;
+  border-radius: 50px;
+  font-size: 1em;
+  font-family: sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #48765b, #54a576, #48765b);
+  z-index: 2;
+}
+
+.boutton_inscription:hover {
+  transform: scale(1.05);
+}
+
+.bouton_inscription_liste {
+  outline: none;
+  transform: translate(35px);
+  cursor: pointer;
+  justify-content: center;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+  border: 1px solid rgb(184, 251, 255);
+  font-size: 1em;
+  font-family: sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #48765b, #54a576, #48765b);
+  z-index: 2;
+}
+
+.boutton_inscription_liste:hover {
+  transform: scale(1.1);
+}
+
+.hide {
+  display: none;
+}
+
+.popup_inscription {
+  position: absolute;
+  top: 5%;
+  right: 0;
+  width: 35%;
+  height: 10%;
+  padding: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  transition: 0.3s ease-out;
+  font-size: 1em;
+  border-radius: 15px 0 0 15px ;
+  background: linear-gradient(135deg, #d88b8b, #ff4141);
+  z-index: 5;
+}
+
+.blue {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (min-width: 37em) {
+  .page {
+    font-size: 1em;
+  }
+
+  .cover {
+    width: 60%;
+    height: 70vh;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  .page {
+    font-size: 1.25em;
+  }
+
+  .cover {
+    width: 25%;
+    height: 65vh;
+  }
+} 

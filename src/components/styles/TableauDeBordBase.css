@@ -1,0 +1,203 @@
+/* src/components/styles/TableauDeBordBase.css */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* Ajout de la gestion du débordement sur le corps du document */
+  scroll-behavior: smooth;
+}
+
+.tableau-de-bord-base {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+}
+
+.top-bloc {
+  position: relative;
+  height: auto;
+}
+
+.title {
+  display: block;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 1px solid white;
+  color: #fff;
+  font-size: 20px;
+  background: linear-gradient(135deg, rgb(2, 74, 23), rgb(29, 174, 85), rgb(2, 74, 23));
+  z-index: 3;
+}
+
+.bouton_deconnexion {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  justify-content: center;
+  padding: 5px 20px 5px 20px;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+  border: 1px solid white;
+  border-radius: 30px;
+  font-family: sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(122, 149, 155, 0.6), rgba(122, 149, 155, 1));
+  z-index: 10;
+}
+
+.boutton_deconnexion:hover {
+  transform: scale(1.05);
+}
+
+.body-bloc {
+  position: absolute;
+  top: 0;
+  height: auto;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sections {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: auto;
+  padding: 3%;
+  z-index: 1;
+}
+
+.section1,
+.section2,
+.section3 {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.sections section {
+  background:  rgba(122, 149, 155, 0.7);
+}
+
+.sections section div {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+.nav-toggler {
+  position: fixed;
+  z-index: 5;
+  top: 10px;
+  left: 105px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.line {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #f1f1f1;
+  transition: transform 0.3s ease-out,
+    opacity 0.1s ease-out;
+}
+
+.l1 {
+  transform: translateY(-10px);
+}
+
+.l3 {
+  transform: translateY(10px);
+}
+
+.nav-toggler.active .l1 {
+  transform: translateY(0) rotate(135deg);
+}
+
+.nav-toggler.active .l2 {
+  opacity: 0;
+}
+
+.nav-toggler.active .l3 {
+  transform: translateY(0) rotate(-135deg);
+}
+
+
+
+.sidebar {
+  box-sizing: border-box;
+  position: fixed;
+  margin-top: 55px;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(90deg, rgb(2, 74, 23), rgb(29, 174, 85), rgb(2, 74, 23));
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out, t;
+  color: #fff;
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 10px;
+  padding: 15px 0 15px 0;
+}
+
+.sidebar li {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar li:hover {
+  background: linear-gradient(135deg, rgba(122, 149, 155, 0.6), rgba(122, 149, 155, 1));
+  border: 1px solid white;
+  border-radius: 30px;
+}
+
+.sidebar.active {
+  transform: translate(0);
+  opacity: 1;
+  z-index: 2;
+}
+

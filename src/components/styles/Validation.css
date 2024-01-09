@@ -1,0 +1,32 @@
+/* src/components/styles/TableauDeBordBase.css */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+/* FormulaireInscription.css */
+
+.validation-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.validation-message {
+  margin-bottom: 10px;
+}
+
+.validation-buttons button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.validation-buttons button:last-child {
+  margin-right: 0;
+}
