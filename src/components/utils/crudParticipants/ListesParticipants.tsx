@@ -36,11 +36,12 @@ interface Participant {
     groupe: Groupe;
 }
 
-const ListesUtilisateurs: React.FC = () => {
+const ListesParticipants: React.FC = () => {
+    const redirection = useNavigate();
+    const [initialUtilisateurs, setInitialUtilisateurs] = useState<Utilisateur[]>([]);
     const [utilisateurs, setUtilisateurs] = useState<Utilisateur[]>([]);
     const [utilisateursTrouve, setUtilisateursTrouve] = useState<Utilisateur[]>([]);
     const [chercherCode, setChercherCode] = useState<string>('');
-    const redirection = useNavigate();
     const [participantsMap, setParticipantsMap] = useState<Map<number, Participant>>(new Map());
     const [groupesMap, setGroupesMap] = useState<Map<number, Groupe>>(new Map());
     const [etatConfirmation, setEtatConfirmation] = useState<{
@@ -50,7 +51,6 @@ const ListesUtilisateurs: React.FC = () => {
         estOuvert: false,
         codeUtilisateurASupprimer: null,
     });
-    const [initialUtilisateurs, setInitialUtilisateurs] = useState<Utilisateur[]>([]);
 
 
     const affichage = async () => {
@@ -307,4 +307,4 @@ const ListesUtilisateurs: React.FC = () => {
         );
     };
 
-    export default ListesUtilisateurs;
+    export default ListesParticipants;

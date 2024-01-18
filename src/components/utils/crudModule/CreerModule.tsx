@@ -99,8 +99,6 @@ const CreerModule: React.FC = () => {
             });
 
 
-
-
         } catch (error) {
             setPopupStyle("popup_connexion");
             setTimeout(() => setPopupStyle("hide"), 3000);
@@ -143,7 +141,7 @@ const CreerModule: React.FC = () => {
                     type="text"
                     placeholder='Cout du module*'
                     value={cout_module}
-                    onChange={(e) => setCoutModule(Number.parseInt(e.target.value))}
+                    onChange={(e) => setCoutModule(parseInt(e.target.value))}
                 />
 
                 <select

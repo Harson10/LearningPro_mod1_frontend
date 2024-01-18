@@ -6,14 +6,33 @@ import { Link } from "react-router-dom";
 import Validation from "../../Validation";
 import { FaSearch, FaPencilAlt, FaTrash, FaPlus } from "react-icons/fa";
 
+interface Formation {
+    code_formation: number;
+    cout_formation: number;
+    nom_formation: string;
+    publication: string
+}
+
+interface Participant {
+    code_participant: number;
+    code_formation: number
+}
+
+interface Utilisateur {
+    code_utilisateur: number;
+    nom: string;
+    prenom: string;
+}
+
 interface Paiement {
     num_facture: number;
     date_paiement: Date;
     tranche_paiement: number;
     montant: number;
     reste: number;
-    formation: number;
-    participant: number;
+    transaction_formation: Formation;
+    transaction_participant: Participant;
+    transaction_utilisateur: Utilisateur;
 }
 
 const ListePaiement: React.FC = () => {
@@ -34,6 +53,7 @@ const ListePaiement: React.FC = () => {
             const reponse = await axios.get<Paiement[]>("http://localhost:4000/paiement");
             setPaiements(reponse.data);
             setPaiementsTrouves(reponse.data);
+            console.log("Paiement:", reponse.data)
         } catch (error) {
             console.error("Erreur lors de la récupération des paiements :", error);
         }
@@ -117,17 +137,19 @@ const ListePaiement: React.FC = () => {
                 <FaSearch className="ml-[-50px] z-10 text-gray-400" />
             </div>
 
-            <div className="flex items-center">
-                <table className="min-w-auto bg-white border border-gray-300">
+            <div className="table-container overflow-x-auto sticky bottom-0">
+                <table className="min-w-full m-[3%] ml-4 bg-white border border-gray-300">
                     <thead>
                         <tr className="bg-gray-100">
-                            <th className="border border-gray-300 py-2 px-4">N° Facture</th>
-                            <th className="border border-gray-300 py-2 px-4">Date de paiement</th>
-                            <th className="border border-gray-300 py-2 px-4">Tranche</th>
-                            <th className="border border-gray-300 py-2 px-4">Montant</th>
-                            <th className="border border-gray-300 py-2 px-4">Reste</th>
-                            <th className="border border-gray-300 py-2 px-4">Formation</th>
-                            <th className="border border-gray-300 py-2 px-4">Participant</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">N° Facture</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Date de paiement</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Tranche</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Montant</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Reste</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Formation</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Participant</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Nom</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Prenom</th>
                             <th className="border border-gray-300">Actions</th>
                         </tr>
                     </thead>
@@ -135,12 +157,14 @@ const ListePaiement: React.FC = () => {
                         {paiementsTrouves.map((paiement: any) => (
                             <tr key={paiement.num_facture} className="hover:bg-white">
                                 <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.num_facture}</td>
-                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.date_paiement}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{new Date(paiement.date_paiement).toLocaleDateString('fr-FR')}</td>
                                 <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.tranche_paiement}</td>
                                 <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.montant}</td>
                                 <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.reste}</td>
-                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.formation}</td>
-                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.participant}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.transaction_formation.nom_formation}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.transaction_participant.code_participant}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.transaction_utilisateur.nom}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{paiement.transaction_utilisateur.prenom}</td>
 
                                 <td className="bg-sky-100 border border-gray-300 py-2 px-4 flex items-center pl-4">
                                     <button

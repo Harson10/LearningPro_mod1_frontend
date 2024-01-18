@@ -33,10 +33,10 @@ const FormulaireInscriptionParticipant: React.FC = () => {
 
   useEffect(() => {
     axios.get<Role[]>('http://localhost:4000/role/')
-      .then(response => {
-        if (response.data && Array.isArray(response.data)) {
-          setRoles(response.data);
-          setChoixRole(response.data[0]?.code_role || '');
+      .then(reponse => {
+        if (reponse.data && Array.isArray(reponse.data)) {
+          setRoles(reponse.data);
+          setChoixRole(reponse.data[0]?.code_role || '');
         } else {
           console.error('Données non disponibles');
         }

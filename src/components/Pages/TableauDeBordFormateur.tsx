@@ -7,7 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 import { FaSignOutAlt, FaUserShield } from "react-icons/fa";
 import ListeGroupe from "../utils/crudGroupe/ListeGroupe";
 import Validation from "../Validation";
-import ListesUtilisateurs from "../utils/crudParticipants/ListesParticipants";
+import ListesParticipants from "../utils/crudParticipants/ListesParticipants";
 import ListeModules from "../utils/crudModule/ListeModules";
 import ListeFormations from "../utils/crudFormation/ListeFormation";
 import ListePaiement from "../utils/crudPaiement/ListePaiement";
@@ -90,7 +90,7 @@ const TableauDeBordFormateur: React.FC = () => {
 
           <section id="section2" className="section2 pt-[100px] w-screen h-screen">
             <div className="p-[10px] overflow-hidden flex">
-              <ListesUtilisateurs />
+              <ListesParticipants />
             </div>
           </section>
 
