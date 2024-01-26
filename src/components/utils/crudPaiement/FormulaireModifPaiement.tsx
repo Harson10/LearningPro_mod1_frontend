@@ -44,21 +44,8 @@ const FormulaireModifPaiement: React.FC = () => {
   const [tranche_paiement, setTranchePaiement] = useState<number>();
   const [montant, setMontant] = useState<number>();
   const [reste, setReste] = useState<number>();
-  // const [transaction_formation, setTransFormation] = useState({
-  //   code_formation: 0,
-  //   cout_formation: 0,
-  //   nom_formation: "",
-  //   publication: ""
-  // });
-  // const [transaction_participant, setTransParticipant] = useState({
-  //   code_participant: 0,
-  //   code_utilisateur: 0
-  // });
-  // const [transaction_utilisateur, setTransUtilisateur] = useState({
-  //   code_utilisateur: 0,
-  //   nom: "",
-  //   prenom: ""
-  // })
+  const [code_formation, setCodeFormation] = useState<number>();
+  const [code_participant, setCodeParticipant] = useState<number>();
 
 
   const [popupStyle, setPopupStyle] = useState<string>("hide");
@@ -75,9 +62,8 @@ const FormulaireModifPaiement: React.FC = () => {
         setTranchePaiement(reponse.data.tranche_paiement);
         setMontant(reponse.data.montant);
         setReste(reponse.data.reste);
-        // setTransFormation(reponse.data.transaction_formation);
-        // setTransParticipant(reponse.data.transaction_participant);
-        // setTransUtilisateur(reponse.data.transaction_utilisateur);
+        setCodeFormation(reponse.data.transaction_formation.code_formation);
+        setCodeParticipant(reponse.data.transaction_participant.code_participant);
 
         console.log("Paiement:", reponse.data)
       } catch (error) {
@@ -101,9 +87,8 @@ const FormulaireModifPaiement: React.FC = () => {
       tranche_paiement: tranche_paiement,
       montant: montant,
       reste: reste,
-      transaction_formation: paiements?.transaction_formation.code_formation,//transaction_formation,
-      transaction_participant: paiements?.transaction_participant.code_participant,//transaction_participant,
-      transaction_utilisateur: paiements?.transaction_utilisateur.code_utilisateur,//transaction_utilisateur
+      code_formation: paiements?.transaction_formation.code_formation,//transaction_formation,
+      code_participant: paiements?.transaction_participant.code_participant,//transaction_participant,
     };
 
     try {
