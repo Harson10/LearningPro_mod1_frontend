@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
 import "../../styles/FormulaireInscription.css";
 import { FaArrowLeft, FaPlus } from "react-icons/fa";
@@ -12,12 +12,10 @@ interface Formation {
   nom_formation: string;
   publication: string
 }
-
 interface Participant {
   code_participant: number;
   code_utilisateur: number
 }
-
 interface Utilisateur {
   code_utilisateur: number;
   nom: string;
@@ -25,17 +23,13 @@ interface Utilisateur {
 }
 
 
-
 const FormulairePaiement: React.FC = () => {
   const [transaction_formation, setFormations] = useState<Formation[]>([]);
   const [transaction_participant, setParticipant] = useState<Participant[]>([]);
-  const [transaction_utilisateur, setUtilisateur] = useState<Utilisateur[]>([]);
+  const [transaction_utilisateur, setUtilisateur] = useState<Utilisateur>();
   const [choixFormation, setChoixFormation] = useState<string>("");
   const [choixParticipant, setChoixParticipant] = useState<string>("");
   const [choixUtilisateur, setChoixUtilisateur] = useState<string>("");
-  const [nom, setNom] = useState<string>("");
-  const [prenom, setPrenom] = useState<string>("");
-
 
   const [date_paiement, setDatePaiement] = useState("");
   const [tranche_paiement, setTranchePaiement] = useState<number>();
@@ -45,6 +39,7 @@ const FormulairePaiement: React.FC = () => {
   const [popupStyle, setPopupStyle] = useState<string>("hide");
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
+  
   useEffect(() => {
     axios.get<Formation[]>('http://localhost:4000/formation/')
       .then(reponse => {
@@ -57,32 +52,12 @@ const FormulairePaiement: React.FC = () => {
       })
       .catch(error => {
         console.log('Erreur lors de la récupération des données');
-      })
-  }, []);
-
-  useEffect(() => {
+      });
     axios.get<Participant[]>('http://localhost:4000/participant/')
       .then(reponse => {
         if (reponse.data && Array.isArray(reponse.data)) {
           setParticipant(reponse.data);
-          setChoixParticipant(String(reponse.data[0]?.code_participant || ''));
-
-          const code_utilisateur = reponse.data[0]?.code_utilisateur;
-
-          axios.get<Utilisateur[]>(`http://localhost:4000/utilisateur/${code_utilisateur}`)
-            .then((response) => {
-              const utilisateurData = response.data;
-
-              console.log(`resUtilisateur ${response}`)
-              setUtilisateur(response.data);
-              setChoixUtilisateur(String(utilisateurData.map(u => u.code_utilisateur)));
-              setNom(`${utilisateurData.map(u => u.nom)}`);
-              setPrenom(`${utilisateurData.map(u => u.prenom)}`);
-            })
-            .catch((error) => {
-              console.error('Erreur lors de la récupération des données utilisateur', error);
-            });
-          
+          setChoixParticipant(String(reponse.data.map(p => p.code_participant) || ''));
         } else {
           console.error('Données non disponibles');
         }
@@ -92,10 +67,24 @@ const FormulairePaiement: React.FC = () => {
       })
   }, []);
 
+  const handleChangeU = (e: ChangeEvent<HTMLSelectElement>) => {
+    setChoixParticipant(e.target.value);
+    const code_participant = parseInt(e.target.value);
 
+    axios.get<Participant>(`http://localhost:4000/participant/${code_participant}`)
+      .then(response => {
+        const code_utilisateur = response.data.code_utilisateur;
+        setChoixUtilisateur(String(code_utilisateur));
 
-  console.log("TransUser:", transaction_utilisateur);
-  console.log(`Nom:${nom}. Prenom: ${prenom}`);
+        axios.get<Utilisateur>(`http://localhost:4000/utilisateur/${code_utilisateur}`)
+          .then((response) => {
+            setUtilisateur(response.data);
+          })
+          .catch((error) => {
+            console.error('Erreur lors de la récupération des données utilisateur', error);
+          });
+      })
+  }
 
   const handlePaiement = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -104,17 +93,15 @@ const FormulairePaiement: React.FC = () => {
 
   const confirmerEnregistrementPaiement = async () => {
     setShowConfirmationDialog(false);
-
     const nouveauPaiement = {
       date_paiement: date_paiement,
       tranche_paiement: tranche_paiement,
       montant: montant,
       reste: reste,
-      transaction_formation: choixFormation,
-      transaction_participant: choixParticipant,
-      transaction_utilisateur: choixUtilisateur
+      code_formation: choixFormation,
+      code_participant: choixParticipant,
+      code_utilisateur: choixUtilisateur
     }
-
     try {
       const reqPaiement = await axios.post("http://localhost:4000/paiement/creer/", nouveauPaiement);
       console.log('Paiement enregistré avec succes', reqPaiement.data);
@@ -129,6 +116,8 @@ const FormulairePaiement: React.FC = () => {
   const annulerEnregistrementPaiement = async () => {
     setShowConfirmationDialog(false);
   }
+
+
 
 
   return (
@@ -199,12 +188,15 @@ const FormulairePaiement: React.FC = () => {
         <select
           className="w-[60%] text-center rounded-[50px] p-[5px]"
           value={choixParticipant}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setChoixParticipant(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            setChoixParticipant(e.target.value);
+            handleChangeU(e);
+          }}
         >
           <option key="default" value="">
             Choisir un participant
           </option>
-          {transaction_participant.map((participant, utilisateur) => (
+          {transaction_participant.map((participant) => (
             <option key={participant.code_participant} value={participant.code_participant}>
               {participant.code_participant}
             </option>
@@ -213,15 +205,15 @@ const FormulairePaiement: React.FC = () => {
 
         <input
           type="text"
-          placeholder='Nom et Prénom'
-          value={nom}
+          placeholder='Nom'
+          value={transaction_utilisateur?.nom}
           readOnly
         />
 
         <input
           type="text"
-          placeholder='Nom et Prénom'
-          value={prenom}
+          placeholder='Prénom'
+          value={transaction_utilisateur?.prenom}
           readOnly
         />
 

@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 import { FaArrowLeft, FaSave } from "react-icons/fa";
 import Validation from "../../Validation";
 
-const ModifierParticipant = () => {
+const ModifierParticipant: React.FC = () => {
   const { code_utilisateur, code_participant } = useParams();
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 

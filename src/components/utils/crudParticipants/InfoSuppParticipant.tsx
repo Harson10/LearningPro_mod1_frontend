@@ -74,7 +74,7 @@ const InfoSuppParticipant: React.FC = () => {
             niveau: niveau,
             diplome: diplome,
             code_groupe: choixGroupe,
-            code_utilisateur: dernierCodeUtilisateur // Utiliser le dernier code utilisateur récupéré
+            code_utilisateur: dernierCodeUtilisateur 
         };
 
         try {

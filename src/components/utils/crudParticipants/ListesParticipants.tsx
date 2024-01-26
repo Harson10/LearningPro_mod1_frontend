@@ -200,7 +200,7 @@ const ListesParticipants: React.FC = () => {
                 <div className="flex mb-[20px] w-[100%]">
                     <button
                         type="button"
-                        className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] p-[8px] rounded-[50px]"
+                        className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 w-[250px] p-[8px] rounded-[50px] bouton_insc_liste "
                         onClick={handleInscrireUtilisateur}
                     >
                         <div className="pl-4">Inscrire</div>
@@ -218,7 +218,7 @@ const ListesParticipants: React.FC = () => {
                     <FaSearch className="ml-[-50px] z-10 text-gray-400" />
                 </div>
 
-                <div className="table-container overflow-x-auto sticky bottom-0">
+                <div className="table-container overflow-x-auto bottom-0">
                     <table className="min-w-full m-[3%] ml-4 bg-white border border-gray-300">
                         <thead>
                             <tr className="bg-gray-100">

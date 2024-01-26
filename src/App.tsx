@@ -18,6 +18,7 @@ import ModifierModule from "./components/utils/crudModule/ModifierModule";
 import ModifierFormation from "./components/utils/crudFormation/ModifierFormation";
 import CreerFormation from "./components/utils/crudFormation/CreerFormation";
 import FormulairePaiement from "./components/utils/crudPaiement/FormulairePaiement";
+import FormulaireModifPaiement from "./components/utils/crudPaiement/FormulaireModifPaiement";
 
 function App() {
   const [estAuthentifiee, setEstAuthentifiee] = useState(false);
@@ -149,7 +150,7 @@ function App() {
           <Route
             path="/paiement/modifier/:num_facture"
             element={
-              estAuthentifiee ? (<ModifierFormation />) : (<Navigate to="/connexion" />)
+              estAuthentifiee ? (<FormulaireModifPaiement />) : (<Navigate to="/connexion" />)
             }
           />
           <Route
