@@ -81,6 +81,7 @@ const ListeModules: React.FC = () => {
       await afficherModules();
 
       setModules(modules.filter(module => module.code_module !== code_module));
+      
       setEtatConfirmation({
         estOuvert: false,
         codeModuleASupprimer: null,
@@ -117,7 +118,7 @@ const ListeModules: React.FC = () => {
         return newInfoFormation;
       });
 
-      // window.history.go()
+      window.history.go()
     } catch (error) {
       console.error("Erreur lors de la suppression du module :", error);
     }

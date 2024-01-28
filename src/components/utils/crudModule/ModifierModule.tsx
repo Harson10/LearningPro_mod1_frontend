@@ -55,6 +55,37 @@ const ModifierModule = () => {
       const reponse = await axios.put(`http://localhost:4000/module/modifier/${code_module}`, infoModule);
       console.log('Module mis à jour : ', reponse.data);
 
+      
+      const cout_actuelle_formation = await axios.get(`http://localhost:4000/module/somme_cout_par_formation/${code_formation}`);
+      console.log('Coup actuel', cout_actuelle_formation.data);
+
+      const cout_formation_ = await cout_actuelle_formation.data;
+
+      const infoF = await axios.get(`http://localhost:4000/formation/${code_formation}`)
+          .catch(error => {
+              console.error('Erreur lors de la récupération des informations sur la formation :', error);
+              throw error;
+          });
+
+      const formation = infoF.data;
+      console.log("infoF: ", formation);
+
+      setInfoFormation(prevInfoFormation => {
+          const newInfoFormation = {
+              ...prevInfoFormation,
+              nom_formation: formation.nom_formation,
+              cout_formation: cout_formation_.sum,
+              publication: formation.publication,
+          };
+          console.log('Total cout_formation:', cout_formation_, '\nNouveau_infoFormation: ', newInfoFormation, '\nAncien_infoFormation: ', infoFormation);
+
+          setInfoFormation(newInfoFormation);
+
+          axios.put(`http://localhost:4000/formation/modifier/${code_formation}`, newInfoFormation);
+
+          return newInfoFormation;
+      });
+
       window.history.back();
     } catch (error) {
       console.error(`Erreur lors de la mise à jour du module : `, error);
