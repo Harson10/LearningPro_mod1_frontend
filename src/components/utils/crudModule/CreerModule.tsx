@@ -98,7 +98,6 @@ const CreerModule: React.FC = () => {
                 return newInfoFormation;
             });
 
-
         } catch (error) {
             setPopupStyle("popup_connexion");
             setTimeout(() => setPopupStyle("hide"), 3000);

@@ -8,6 +8,12 @@ import Validation from "../../Validation";
 const ModifierModule = () => {
   const { code_module } = useParams();
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+  const [code_formation, setCodeFormation] = useState();
+  const [infoFormation, setInfoFormation] = useState({
+      nom_formation: "",
+      cout_formation: 0,
+      publication: "Non",
+  });
 
   const [infoModule, setInfoModule] = useState({
     nom_module: "",
@@ -19,6 +25,7 @@ const ModifierModule = () => {
       try {
         const reponse = await axios.get(`http://localhost:4000/module/${code_module}`);
         const Module = reponse.data;
+        setCodeFormation(reponse.data.code_formation);
         setInfoModule(Module);
       } catch (error) {
         console.error(`Erreur lors de la récupération du module : `, error);
@@ -37,7 +44,7 @@ const ModifierModule = () => {
 
   const handleSoumissionForm = async (e: any) => {
     e.preventDefault();
-    
+
     setShowConfirmationDialog(true);
   };
 
@@ -46,8 +53,8 @@ const ModifierModule = () => {
 
     try {
       const reponse = await axios.put(`http://localhost:4000/module/modifier/${code_module}`, infoModule);
-
       console.log('Module mis à jour : ', reponse.data);
+
       window.history.back();
     } catch (error) {
       console.error(`Erreur lors de la mise à jour du module : `, error);
@@ -61,10 +68,10 @@ const ModifierModule = () => {
   return (
     <div className="form_modification_utilisateur">
       <div className="retour_tabBord_modif">
-          <button onClick={() => window.history.back()} className="flex p-[13px]">
-            <div className="pl-12">Retour</div>
-            <div className="p-[3px] pl-4"><FaArrowLeft /></div>
-          </button>
+        <button onClick={() => window.history.back()} className="flex p-[13px]">
+          <div className="pl-12">Retour</div>
+          <div className="p-[3px] pl-4"><FaArrowLeft /></div>
+        </button>
       </div>
 
       <form className="formulaire_modif_utilisateur h-[70%] overflow-hidden" onSubmit={handleSoumissionForm}>
@@ -90,7 +97,7 @@ const ModifierModule = () => {
           </button>
         </div>
       </form>
-      
+
       <Validation
         isOpen={showConfirmationDialog}
         onConfirm={confirmerSoumission}

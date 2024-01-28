@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBook, FaTable, FaUserCheck, FaUsers } from "react-icons/fa";
+import { FaBook, FaDesktop, FaTable, FaUserCheck, FaUsers } from "react-icons/fa";
 
 export default function Layout() {
   const scrollToSection = (sectionId: string) => {
@@ -64,6 +64,14 @@ export default function Layout() {
                 <FaUserCheck />
               </div>
               <div className="pl-1">Gérer les paiements</div>
+            </button>
+          </li>
+          <li className="hover:bg-sky-200 rounded-[50px] p-1 w-[205px]">
+            <button onClick={() => scrollToSection("section7")} className="flex">
+              <div className="p-[3px] pl-2">
+                <FaDesktop />
+              </div>
+              <div className="pl-1">Publication</div>
             </button>
           </li>
         </ul>

@@ -11,6 +11,7 @@ import ListesParticipants from "../utils/crudParticipants/ListesParticipants";
 import ListeModules from "../utils/crudModule/ListeModules";
 import ListeFormations from "../utils/crudFormation/ListeFormation";
 import ListePaiement from "../utils/crudPaiement/ListePaiement";
+import ListeEtapeContenu from "../utils/crudEtape/ListeEtapeContenu";
 
 const TableauDeBordFormateur: React.FC = () => {
   const [navToggler, setNavToggler] = useState(false);
@@ -110,6 +111,10 @@ const TableauDeBordFormateur: React.FC = () => {
 
           <section id="section6" className="section6 pt-[100px] w-screen h-screen overflow-auto">
             <ListePaiement />
+          </section>
+
+          <section id="section7" className="section7 pt-[100px] w-screen h-screen overflow-auto">
+            <ListeEtapeContenu />
           </section>
 
 

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../styles/FormulaireInscription.css";
 import { FaArrowLeft, FaPlus } from "react-icons/fa";
@@ -44,8 +44,6 @@ const FormulaireModifPaiement: React.FC = () => {
   const [tranche_paiement, setTranchePaiement] = useState<number>();
   const [montant, setMontant] = useState<number>();
   const [reste, setReste] = useState<number>();
-  const [code_formation, setCodeFormation] = useState<number>();
-  const [code_participant, setCodeParticipant] = useState<number>();
 
 
   const [popupStyle, setPopupStyle] = useState<string>("hide");
@@ -62,8 +60,6 @@ const FormulaireModifPaiement: React.FC = () => {
         setTranchePaiement(reponse.data.tranche_paiement);
         setMontant(reponse.data.montant);
         setReste(reponse.data.reste);
-        setCodeFormation(reponse.data.transaction_formation.code_formation);
-        setCodeParticipant(reponse.data.transaction_participant.code_participant);
 
         console.log("Paiement:", reponse.data)
       } catch (error) {
