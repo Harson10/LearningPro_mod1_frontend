@@ -19,6 +19,8 @@ import ModifierFormation from "./components/utils/crudFormation/ModifierFormatio
 import CreerFormation from "./components/utils/crudFormation/CreerFormation";
 import FormulairePaiement from "./components/utils/crudPaiement/FormulairePaiement";
 import FormulaireModifPaiement from "./components/utils/crudPaiement/FormulaireModifPaiement";
+import AjoutEtapeContenu from "./components/utils/crudEtape/AjoutEtapeContenu";
+import ModifierEtapeContenu from "./components/utils/crudEtape/ModifierEtapeContenu";
 
 function App() {
   const [estAuthentifiee, setEstAuthentifiee] = useState(false);
@@ -106,6 +108,12 @@ function App() {
             }
           />
           <Route
+            path="/creer-etape"
+            element={
+              estAuthentifiee ? (<AjoutEtapeContenu />) : (<Navigate to="/connexion" />)
+            }
+          />
+          <Route
             path="/creer-formation"
             element={
               estAuthentifiee ? (<CreerFormation />) : (<Navigate to="/connexion" />)
@@ -139,6 +147,12 @@ function App() {
             path="/module/modifier/:code_module"
             element={
               estAuthentifiee ? (<ModifierModule />) : (<Navigate to="/connexion" />)
+            }
+          />
+          <Route
+            path="/etape/modifier/:num_etape"
+            element={
+              estAuthentifiee ? (<ModifierEtapeContenu />) : (<Navigate to="/connexion" />)
             }
           />
           <Route

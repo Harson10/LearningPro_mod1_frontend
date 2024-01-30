@@ -41,7 +41,7 @@ const ListeEtapeContenu: React.FC = () => {
   }, []);
 
   const handleCreerEtape = () => {
-    redirection("/etape");
+    redirection("/creer-etape");
   };
 
   const handleSupprimerEtape = async (num_etape: number) => {
@@ -77,7 +77,10 @@ const ListeEtapeContenu: React.FC = () => {
     setChercherNom(valeurCherchee);
 
     const trouve = etapes.filter(
-      (etape) => etape.nom_etape.toLowerCase().includes(valeurCherchee)
+      (etape) => 
+        etape.nom_etape.toLowerCase().includes(valeurCherchee) ||
+        etape.module.toLowerCase().includes(valeurCherchee) ||
+        etape.texte.toLowerCase().includes(valeurCherchee)
     );
     setEtapeTrouvee(valeurCherchee ? trouve : etapes);
   };
@@ -107,66 +110,70 @@ const ListeEtapeContenu: React.FC = () => {
         <FaSearch className="ml-[-50px] z-10 text-gray-400" />
       </div>
 
-      <h2 className="text-2xl font-bold mb-4">Liste des étapes</h2>
-      <div className="flex items-center">
-        <table className="min-w-auto bg-white border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 py-2 px-4">Module</th>
-              <th className="border border-gray-300 py-2 px-4">Nom de l'étape</th>
-              <th className="border border-gray-300 py-2 px-4">Texte</th>
-              <th className="border border-gray-300 py-2 px-4">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="hover:bg-white">
-            {etapeTrouvee.map((etape: Etape) => (
-              <tr key={etape.num_etape} className="hover:bg-white">
-                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{etape.module}</td>
-                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{etape.nom_etape}</td>
-                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{etape.texte}</td>
-                <td className="bg-sky-100 border border-gray-300 py-2 px-4 flex items-center pl-4">
-                  <button
-                    className="bg-gradient-to-br from-green-900 via-green-500 to-green-900 flex text-white border border-white 
+      <h2 className="text-2xl font-bold mb-4">Publications</h2>
+
+      <div className="flex flex-wrap mb-[20px] w-[95%] w-screen h-auto">
+
+        {etapeTrouvee.map((etape: Etape) => (
+          <div className="shadow-xl w-[80%] h-[100%] rounded-[30px] p-2 bg-white m-[1%]">
+            <div className="bg-green-700 w-[100%] h-[20%] m-0 rounded-[25px] p-2 text-white">
+
+              <div key={etape.num_etape} className="flex items-center">
+                <div className="p-4">Module: {etape.module}</div>
+              </div>
+
+              <div className="bg-white text-gray-700 w-[96%] h-[76%] contenu_module m-[2%]">
+                Titre: {etape.nom_etape}
+              </div>
+
+              <div className="bg-white text-gray-700 w-[96%] h-[76%] m-[2%]">
+                {etape.texte}
+              </div>
+
+              <div className="flex flex-center scale-80">
+                <button
+                  className="bg-gradient-to-br from-green-900 via-green-500 to-green-900 flex text-white border border-white 
                       py-1 px-2 w-[170px] p-[20px] rounded-[50px] hover:scale-110 mr-4"
-                  >
-                    <div className="pl-6">
-                      <Link to={`/etape/modifier/${etape.num_etape}`}>Modifier</Link>
-                    </div>
-                    <div className="pl-2 items-center justify-center">
-                      <FaPencilAlt className="pr-2 w-[30px] h-[30px] p-[10%]" />
-                    </div>
-                  </button>
+                >
+                  <div className="pl-6">
+                    <Link to={`/etape/modifier/${etape.num_etape}`}>Modifier</Link>
+                  </div>
+                  <div className="pl-2 items-center justify-center">
+                    <FaPencilAlt className="pr-2 w-[30px] h-[30px] p-[10%]" />
+                  </div>
+                </button>
 
-                  <button
-                    className="bg-gradient-to-br from-red-900 via-red-500 to-red-900 flex text-white border border-white 
+                <button
+                  className="bg-gradient-to-br from-red-900 via-red-500 to-red-900 flex text-white border border-white 
                       py-1 px-2 w-[170px] rounded-[50px] hover:scale-110"
-                    type="button"
-                    onClick={() => {
-                      handleSupprimerEtape(etape.num_etape);
-                    }}
-                  >
-                    <div className="pl-4">Supprimer</div>
-                    <div className="pl-2 pr-2 items-center justify-center mr-2">
-                      <FaTrash className="pr-2 w-[30px] h-[30px] p-[10%]" />
-                    </div>
-                  </button>
+                  type="button"
+                  onClick={() => {
+                    handleSupprimerEtape(etape.num_etape);
+                  }}
+                >
+                  <div className="pl-4">Supprimer</div>
+                  <div className="pl-2 pr-2 items-center justify-center mr-2">
+                    <FaTrash className="pr-2 w-[30px] h-[30px] p-[10%]" />
+                  </div>
+                </button>
+              </div>
+            </div>
+            
+            <Validation
+                isOpen={etatConfirmation.estOuvert && etatConfirmation.numEtapeASupprimer === etape.num_etape}
+                onConfirm={() => {
+                  confirmerSuppressionEtape(etape.num_etape);
+                }}
+                onCancel={annulerSuppressionEtape}
+                message="Êtes-vous sûr de vouloir la suppression"
+                bg_modal_show="bg-white shadow-sm"
+                style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
+                style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
+              />
 
-                  <Validation
-                    isOpen={etatConfirmation.estOuvert && etatConfirmation.numEtapeASupprimer === etape.num_etape}
-                    onConfirm={() => {
-                      confirmerSuppressionEtape(etape.num_etape);
-                    }}
-                    onCancel={annulerSuppressionEtape}
-                    message="Êtes-vous sûr de vouloir la suppression"
-                    bg_modal_show="bg-white shadow-sm"
-                    style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
-                    style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          </div>
+        ))}
+
       </div>
     </div>
   );
