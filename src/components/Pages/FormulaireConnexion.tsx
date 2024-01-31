@@ -25,13 +25,14 @@ const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({ onRoleAPI }) 
         prenom,
         mot_de_passe,
       });
-      const { token, roleUtilisateur } = reponse.data;
+      const { token, roleUtilisateur, codeUtilisateur } = reponse.data;
 
       const reponseRole = await axios.get(`http://localhost:4000/role/${roleUtilisateur}`);
       const roleAPI = reponseRole.data.role;
 
       localStorage.setItem("token", token);
       localStorage.setItem("roleUtilisateur", roleAPI);
+      localStorage.setItem("codeUtilisateur", codeUtilisateur);
       connexion();
 
       // Utilisez la fonction passée en tant que prop pour remonter le rôle

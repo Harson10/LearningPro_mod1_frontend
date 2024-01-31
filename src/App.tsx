@@ -21,13 +21,17 @@ import FormulairePaiement from "./components/utils/crudPaiement/FormulairePaieme
 import FormulaireModifPaiement from "./components/utils/crudPaiement/FormulaireModifPaiement";
 import AjoutEtapeContenu from "./components/utils/crudEtape/AjoutEtapeContenu";
 import ModifierEtapeContenu from "./components/utils/crudEtape/ModifierEtapeContenu";
+import ListeEtapeContenuParticipant from "./components/utils/crudEtape/ListeEtapeContenuParticipant";
+import PageParticipantB from "./components/Pages/PageParticipantB";
 
 function App() {
   const [estAuthentifiee, setEstAuthentifiee] = useState(false);
   const [roleAPIFromChild, setRoleAPIFromChild] = useState<string | null>(null);
   const token = localStorage.getItem("token");
+  // const codeUtilisateur = localStorage.getItem("codeUtilisateur")
 
   console.log("Role du composant fils:", roleAPIFromChild);
+  // console.log("Code utilisateur:", codeUtilisateur);
 
   useEffect(() => {
     if (token) {
@@ -141,6 +145,12 @@ function App() {
             path="/utilisateur/modifier/:code_utilisateur"
             element={
               estAuthentifiee ? (<ModifierUtilisateur />) : (<Navigate to="/connexion" />)
+            }
+          />
+          <Route
+            path="/module/liste-contenu-participant/:code_module"
+            element={
+              estAuthentifiee ? (<PageParticipantB />) : (<Navigate to="/connexion" />)
             }
           />
           <Route

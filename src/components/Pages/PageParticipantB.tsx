@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import ListeModules from '../utils/crudModule/ListeModulesParticipant';
 import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 import Validation from '../Validation';
 import { useAuth } from '../../context/AuthContext';
+import ListeEtapeContenuParticipant from '../utils/crudEtape/ListeEtapeContenuParticipant';
+import "../styles/TableauDeBordBase.css";
 
-const Participant: React.FC = () => {
+const ParticipantB: React.FC = () => {
 
-  
+
   const { deconnexion } = useAuth();
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
-  
+
   const handleDeconnexion = async () => {
     setShowConfirmationDialog(true);
   }
@@ -28,7 +29,7 @@ const Participant: React.FC = () => {
 
 
   return (
-    <div className='flex items-center bg-gray-300'>
+    <div className='tableau-de-bord-base'>
       <div className="top-bloc">
 
         <div className="title h-auto">
@@ -48,25 +49,31 @@ const Participant: React.FC = () => {
           <div className="pl-4 pr-4"><FaSignOutAlt /></div>
         </div>
       </div>
-      
-      <div className="flex items-center w-screen h-screen overflow-auto">
-        <ListeModules />
-      </div>
-      
-      <div className="fixed z-20">
-          <Validation
-            isOpen={showConfirmationDialog}
-            onConfirm={confirmerDeconnexion}
-            onCancel={annulerDeconnexion}
-            message="Se déconnecter de Learning Pro ?"
-            bg_modal_show="bg-white shadow-sm"
-            style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
-            style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
-          />
+
+      <div className="body-bloc">
+        <div className="sections">
+          <section id="section1" className="section2 pt-[100px] w-screen h-screen">
+            <div className="p-[10px] overflow-hidden flex">
+              <ListeEtapeContenuParticipant />
+            </div>
+          </section>
         </div>
+      </div>
+
+      <div className="fixed z-20">
+        <Validation
+          isOpen={showConfirmationDialog}
+          onConfirm={confirmerDeconnexion}
+          onCancel={annulerDeconnexion}
+          message="Se déconnecter de Learning Pro ?"
+          bg_modal_show="bg-white shadow-sm"
+          style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
+          style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
+        />
+      </div>
 
     </div>
   );
 }
 
-export default Participant;
+export default ParticipantB;

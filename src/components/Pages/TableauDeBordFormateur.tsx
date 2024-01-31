@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../styles/TableauDeBordBase.css";
 import Layout from "../utils/objetsTBord/Formateur/LayoutFormateur";
-// import ChartTableauDeBord from "../utils/objetsTBord/Administrateur/ChartTableauDeBord";
 import Effectif from "../utils/objetsTBord/Effectifs";
 import { useAuth } from "../../context/AuthContext";
 import { FaSignOutAlt, FaUserShield } from "react-icons/fa";
@@ -85,7 +84,6 @@ const TableauDeBordFormateur: React.FC = () => {
 
               <h2 className="text-2xl font-bold mb-0 mt-4">Effectif des utilisateurs</h2>
               <Effectif />
-              {/* <ChartTableauDeBord /> */}
             </div>
           </section>
 
