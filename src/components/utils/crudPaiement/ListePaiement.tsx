@@ -95,11 +95,11 @@ const ListePaiement: React.FC = () => {
 
     const annulerSuppressionPaiement = async () => {
         setEtatConfirmation({
-          estOuvert: false,
-          numFactureASupprimer: null,
+            estOuvert: false,
+            numFactureASupprimer: null,
         });
-      }
-    
+    }
+
     const handleRecherche = (e: ChangeEvent<HTMLInputElement>) => {
         const valeurCherchee = e.target.value.toLowerCase();
         setChercherFacture(valeurCherchee);
@@ -116,25 +116,26 @@ const ListePaiement: React.FC = () => {
         <div>
             <h2 className="text-2xl font-bold mb-4">Gestion des paiements</h2>
 
-            <div className="flex mb-[20px] w-[95%]">
+            <div className="flex flex-col lg:flex-row mb-5 w-full lg:w-[95%] items-center justify-center">
                 <button
                     type="button"
-                    className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 w-[250px] p-[8px] rounded-[50px] bouton_insc_liste"
+                    className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] rounded-[50px] p-2 mb-5 mr-[50px] lg:mb-0 lg:mr-8"
                     onClick={handleNouveauPaiement}
                 >
-                    <div className="pl-4">Nouveau</div>
-                    <div className="pl-2 rounded-full items-center justify-center"><FaPlus className="pr-2 w-[30px] h-[30px] p-[10%]" /></div>
+                    <div className="pl-4">Creer</div>
+                    <div className="pl-2 rounded-full items-center justify-center"><FaPlus className="pr-2 w-[30px]" /></div>
                 </button>
 
-                <input
-                    className="input_recherche w-[250px] ml-[40%]"
-                    type="text"
-                    placeholder='Chercher ...'
-                    value={chercherFacture}
-                    onChange={handleRecherche}
-                />
-
-                <FaSearch className="ml-[-50px] z-10 text-gray-400" />
+                <div className="flex items-center justify-center w-[250px] mb-5 lg:mb-0 mr-[10px]lg:mr-0">
+                    <input
+                        className="input_recherche w-full p-2"
+                        type="text"
+                        placeholder="Chercher ..."
+                        value={chercherFacture}
+                        onChange={handleRecherche}
+                    />
+                    <FaSearch className="text-gray-400 ml-[-50px] z-10" />
+                </div>
             </div>
 
             <div className="table-container overflow-x-auto bottom-0">

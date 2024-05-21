@@ -60,7 +60,7 @@ const FormulaireInscription: React.FC = () => {
 
 
   const confirmerInscription = async () => {
-    
+
     setShowConfirmationDialog(false);
 
 
@@ -104,13 +104,15 @@ const FormulaireInscription: React.FC = () => {
 
 
   return (
-    <div className="form_inscription">
+    <div className="form_inscription  flex relative w-screen h-screen box-border m-0 text-center justify-center items-center bg-cover bg-fixed bg-no-repeat bg-center font-sans">
 
-      <div className="retour_tabBord" onClick={() => window.history.back()} >
-        <button className="flex p-[13px]">
-          <div className="pl-12">Retour</div>
-          <div className="p-[3px] pl-4"><FaArrowLeft /></div>
-        </button>
+      <div className="absolute w-full h-full bg-transparent" onClick={() => window.history.back()} >
+        <div className="flex relative w-full h-[50px] lg:h-[75px] z-20">
+          <button className="retour_acceuil absolute px-0 w-[180px] top-[9px] left-[10px] h-[35px] lg:px-8 lg:w-[250px] lg:top-[12.25px] lg:left-[30px] lg:h-[50px] rounded-[30px] text-white font-bold shadow-md shadow-gray-700 border-2 border-white flex items-center hover:bg-green-700">
+            <div className="pl-4">Retour à l'acceuil</div>
+            <div className="p-[4px] pl-3"><FaArrowLeft /></div>
+          </button>
+        </div>
       </div>
 
       <div className={popupStyle}>

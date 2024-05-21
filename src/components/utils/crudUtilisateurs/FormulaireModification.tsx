@@ -10,6 +10,7 @@ const ModifierUtilisateur = () => {
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
   const [infoUtilisateur, setInfoUtilisateur] = useState({
+    mot_de_passe: "",
     nom: "",
     prenom: "",
     adresse: "",
@@ -98,6 +99,13 @@ const ModifierUtilisateur = () => {
           placeholder='Saissisez la nouvelle profession'
           name="profession"
           value={infoUtilisateur.profession}
+          onChange={handleSaisieChangee}
+        />
+        <input
+          type="text"
+          placeholder='Saissisez le nouveau mot de passe'
+          name="mot_de_passe"
+          value={infoUtilisateur.mot_de_passe}
           onChange={handleSaisieChangee}
         />
         <div className="boutton_modification_utilisateur">

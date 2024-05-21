@@ -34,7 +34,7 @@ const Effectif: React.FC = () => {
     return (
         <div className="p-[20px]">
             <div>
-                <div className="flex gap-4 w-full">
+                <div className="flex flex-col gap-4 lg:flex-row lg:gap-4 w-full">
                     <BoxWrapper>
                         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-sky-500 ">
                             <FaUsers className="text-2xl text-white" />

@@ -6,22 +6,26 @@ import { FaArrowLeft, FaSave } from "react-icons/fa";
 import Validation from "../../Validation";
 
 const ModifierEtapeContenu: React.FC = () => {
-
   const { num_etape } = useParams();
   const [module, setModule] = useState("");
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
   const [infoEtape, setInfoEtape] = useState({
     nom_etape: "",
     texte: "",
+    pdf_path: "", // Ajout du champ pdf_path
   });
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
 
   useEffect(() => {
     const afficherEtape = async () => {
       try {
         const reponse = await axios.get(`http://localhost:4000/etape/${num_etape}`);
         const Etape = reponse.data;
-        setInfoEtape(Etape);
-
+        setInfoEtape({
+          nom_etape: Etape.nom_etape,
+          texte: Etape.texte,
+          pdf_path: Etape.pdf_path, // Ajout de pdf_path
+        });
         const code_module = reponse.data.code_module;
         const reponseModule = await axios.get(`http://localhost:4000/module/${code_module}`);
         setModule(reponseModule.data.nom_module);
@@ -29,7 +33,6 @@ const ModifierEtapeContenu: React.FC = () => {
         console.error(`Erreur lors de la récupération du module : `, error);
       }
     };
-
     afficherEtape();
   }, [num_etape]);
 
@@ -49,11 +52,19 @@ const ModifierEtapeContenu: React.FC = () => {
 
   const confirmerSoumission = async () => {
     setShowConfirmationDialog(false);
-
     try {
-      const reponse = await axios.put(`http://localhost:4000/etape/modifier/${num_etape}`, infoEtape);
+      const formData = new FormData();
+      formData.append("nom_etape", infoEtape.nom_etape);
+      formData.append("texte", infoEtape.texte);
+      if (pdfFile) {
+        formData.append("pdf_path", pdfFile, pdfFile.name);
+      }
+      const reponse = await axios.put(`http://localhost:4000/etape/modifier/${num_etape}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('Etape mis à jour : ', reponse.data);
-
       window.history.back();
     } catch (error) {
       console.error(`Erreur lors de la mise à jour de l'etape : `, error);
@@ -95,6 +106,11 @@ const ModifierEtapeContenu: React.FC = () => {
           name="texte"
           value={infoEtape.texte}
           onChange={handleSaisieChangee}
+        />
+        <input
+          type="file"
+          accept="application/pdf"
+          onChange={(e) => setPdfFile(e.target.files?.[0] || null)}
         />
         <div className="boutton_modification_utilisateur">
           <button type="submit" className="flex">

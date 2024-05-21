@@ -68,23 +68,23 @@ const ListeModules: React.FC = () => {
         <div><h2 className="text-2xl font-bold mb-4 ml-[40%]">Listes des modules</h2></div>
       </div>
 
-      <div className="flex mb-[20px] w-[95%]">
-
-        <input
-          className="input_recherche w-[250px] ml-[40%]"
-          type="text"
-          placeholder='Nom de module...'
-          value={chercherCode}
-          onChange={handleRecherche}
-        />
-
-        <FaSearch className="ml-[-50px] mt-[12px] z-10 text-gray-400" />
+      <div className="flex flex-col lg:flex-row mb-5 w-full lg:w-[95%] items-center justify-center">
+        <div className="flex items-center justify-center w-[250px] mb-5 lg:mb-0 mr-[10px]lg:mr-0">
+          <input
+            className="input_recherche w-full p-2"
+            type="text"
+            placeholder="Chercher ..."
+            value={chercherCode}
+            onChange={handleRecherche}
+          />
+          <FaSearch className="text-gray-400 ml-[-50px] z-10" />
+        </div>
       </div>
 
       <div className="w-screen h-auto flex flex-wrap items-center">
 
         {modulesTrouve.map((module: any) => (
-          <div className="shadow-xl w-[30%] h-[100%] rounded-[30px] p-2 bg-white m-[1%]">
+          <div className="shadow-xl w-full sm:w-[48%] md:w-[30%] h-auto rounded-[30px] p-2 bg-white m-[3%] lg:m-[1%]">
             <div className="bg-green-700 w-[100%] h-[20%] m-0 titre_module rounded-[25px] p-2 text-white">
               <div key={module.code_module} className="flex items-center pl-[5%]">
                 <div>{module.nom_module}</div>
@@ -112,8 +112,6 @@ const ListeModules: React.FC = () => {
           </div>
         ))}
       </div>
-
-
 
     </div>
   );

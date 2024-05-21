@@ -62,9 +62,9 @@ const TableauDeBordFormateur: React.FC = () => {
           </div>
         </div>
 
-        <div className="bouton_deconnexion" onClick={handleDeconnexion}>
-          <div className="pl-4">Se déconnecter</div>
-          <div className="pl-4 pr-4"><FaSignOutAlt /></div>
+        <div className="bouton_deconnexion hover:scale-110" onClick={handleDeconnexion}>
+          <div className="pl-4 hidden lg:block">Se déconnecter</div>
+          <div className="pl-4 pr-4 text-2xl lg:text-base"><FaSignOutAlt /></div>
         </div>
       </div>
 
@@ -75,11 +75,9 @@ const TableauDeBordFormateur: React.FC = () => {
           <section id="section1" className="section1 pt-[120px] h-screen w-screen">
             <div>
               <div className="flex item-center">
-                <div className="w-[100px] h-[100px] m-[20px] bg-white rounded-[50%]"> </div>
-                <div className="bg-white w-[300px] h-[300px] rounded-[50%]">
-                  <img src="/utils/formateur.jpg" className=" w-[100%] h-auto p-[20px] rounded-[50%]" alt="admin" />
-                </div>
-                <div className="w-[100px] h-[100px] m-[20px] bg-white rounded-[50%]"> </div>
+                <div className="w-[40px] h-[40px] lg:w-[100px] lg:h-[100px] m-[20px] bg-white rounded-[50%]"> </div>
+                <img src="/utils/formateur.jpg" className=" w-[55%] lg:w-[22%] h-auto rounded-[50%]" alt="admin" />
+                <div className="w-[40px] h-[40px] lg:w-[100px] lg:h-[100px] m-[20px] bg-white rounded-[50%]"> </div>
               </div>
 
               <h2 className="text-2xl font-bold mb-0 mt-4">Effectif des utilisateurs</h2>

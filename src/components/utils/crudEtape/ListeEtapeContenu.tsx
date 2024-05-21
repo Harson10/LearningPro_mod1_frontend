@@ -3,6 +3,7 @@ import axios from "axios";
 import { FaPencilAlt, FaSearch, FaTrash, FaUserPlus } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Validation from "../../Validation";
+import PDFViewer from "../PDFViewer";
 
 interface Etape {
   num_etape: number;
@@ -10,6 +11,7 @@ interface Etape {
   texte: string;
   code_module: number;
   module: string;
+  pdf_path: string; // Ajoutez cette ligne
 }
 
 const ListeEtapeContenu: React.FC = () => {
@@ -24,6 +26,7 @@ const ListeEtapeContenu: React.FC = () => {
     estOuvert: false,
     numEtapeASupprimer: null,
   });
+
 
   const afficherEtapes = async () => {
     try {
@@ -77,7 +80,7 @@ const ListeEtapeContenu: React.FC = () => {
     setChercherNom(valeurCherchee);
 
     const trouve = etapes.filter(
-      (etape) => 
+      (etape) =>
         etape.nom_etape.toLowerCase().includes(valeurCherchee) ||
         etape.module.toLowerCase().includes(valeurCherchee) ||
         etape.texte.toLowerCase().includes(valeurCherchee)
@@ -87,27 +90,26 @@ const ListeEtapeContenu: React.FC = () => {
 
   return (
     <div>
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row mb-5 w-full lg:w-[95%] items-center justify-center">
         <button
           type="button"
-          className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] p-[8px] rounded-[50px]"
+          className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] rounded-[50px] p-2 mb-5 mr-[50px] lg:mb-0 lg:mr-8"
           onClick={handleCreerEtape}
         >
-          <div className="pl-4">Créer une étape</div>
-          <div className="pl-2 rounded-full items-center justify-center">
-            <FaUserPlus className="pr-2 w-[30px] h-[30px] p-[10%]" />
-          </div>
+          <div className="pl-4">Creer</div>
+          <div className="pl-2 rounded-full items-center justify-center"><FaUserPlus className="pr-2 w-[30px]" /></div>
         </button>
 
-        <input
-          className="input_recherche w-[250px] ml-[40%]"
-          type="text"
-          placeholder="Chercher ..."
-          value={chercherNom}
-          onChange={handleRecherche}
-        />
-
-        <FaSearch className="ml-[-50px] z-10 text-gray-400" />
+        <div className="flex items-center justify-center w-[250px] mb-5 lg:mb-0 mr-[10px]lg:mr-0">
+          <input
+            className="input_recherche w-full p-2"
+            type="text"
+            placeholder="Chercher ..."
+            value={chercherNom}
+            onChange={handleRecherche}
+          />
+          <FaSearch className="text-gray-400 ml-[-50px] z-10" />
+        </div>
       </div>
 
       <h2 className="text-2xl font-bold mb-4">Publications</h2>
@@ -129,11 +131,17 @@ const ListeEtapeContenu: React.FC = () => {
               <div className="bg-white text-gray-700 w-[96%] h-[76%] m-[2%]">
                 {etape.texte}
               </div>
+              
+              {etape.pdf_path && (
+                <div className="bg-white text-gray-700 w-[96%] h-[76%] m-[2%]">
+                  <PDFViewer pdfUrl={`http://localhost:4000/${etape.pdf_path}`} />
+                </div>
+              )}
 
               <div className="flex flex-center scale-80">
                 <button
                   className="bg-gradient-to-br from-green-900 via-green-500 to-green-900 flex text-white border border-white 
-                      py-1 px-2 w-[170px] p-[20px] rounded-[50px] hover:scale-110 mr-4"
+                      py-1 px-2 w-[170px] p-[20px] rounded-[50px] hover:scale-105 mr-4"
                 >
                   <div className="pl-6">
                     <Link to={`/etape/modifier/${etape.num_etape}`}>Modifier</Link>
@@ -145,7 +153,7 @@ const ListeEtapeContenu: React.FC = () => {
 
                 <button
                   className="bg-gradient-to-br from-red-900 via-red-500 to-red-900 flex text-white border border-white 
-                      py-1 px-2 w-[170px] rounded-[50px] hover:scale-110"
+                      py-1 px-2 w-[170px] rounded-[50px] hover:scale-105"
                   type="button"
                   onClick={() => {
                     handleSupprimerEtape(etape.num_etape);
@@ -158,18 +166,18 @@ const ListeEtapeContenu: React.FC = () => {
                 </button>
               </div>
             </div>
-            
+
             <Validation
-                isOpen={etatConfirmation.estOuvert && etatConfirmation.numEtapeASupprimer === etape.num_etape}
-                onConfirm={() => {
-                  confirmerSuppressionEtape(etape.num_etape);
-                }}
-                onCancel={annulerSuppressionEtape}
-                message="Êtes-vous sûr de vouloir la suppression"
-                bg_modal_show="bg-white shadow-sm"
-                style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
-                style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
-              />
+              isOpen={etatConfirmation.estOuvert && etatConfirmation.numEtapeASupprimer === etape.num_etape}
+              onConfirm={() => {
+                confirmerSuppressionEtape(etape.num_etape);
+              }}
+              onCancel={annulerSuppressionEtape}
+              message="Êtes-vous sûr de vouloir la suppression"
+              bg_modal_show="bg-white shadow-sm"
+              style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
+              style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
+            />
 
           </div>
         ))}

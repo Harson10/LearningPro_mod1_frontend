@@ -5,60 +5,16 @@
 }
 
 .enTete {
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: 75px;
-    z-index: 2;
-    box-shadow: 0 0.25em 1em rgba(56, 56, 56, 0.5);
     background: linear-gradient(135deg, rgb(2, 74, 23), rgb(29, 174, 85), rgb(2, 74, 23));
 }
 
-.nom_plateforme {
-    position: absolute;
-    width: auto;
-    height: auto;
-    padding: 10px;
-    left: 3%;
-    font-weight: bold;
-    font-size: 35px;
-    color: white;
-}
-
 .bouton_connexion_acceuil {
-    position: absolute;
-    top: 12.25px;
-    right: 30px;
-    height: 50px;
-    border-radius: 30px;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.5);
-    border: 2px solid white;
-    transition: 0.3s ease-out;
+    transition: 0.3s ease-out; 
     background: linear-gradient(135deg, #54a576, #48765b);
-    z-index: 1;
 }
 
 .bouton_connexion_acceuil:hover {
-    scale: 1.1;
-}
-
-.corps_acceuil {
-    position: absolute;
-    top: 0;
-    background: rgba(122, 149, 155, 0.6);
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.bienvenu {
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: 35%;
-    left: 10%;
+    scale: 1.05;
 }
 
 .bienvenu span {
@@ -71,12 +27,6 @@
     color: #f1f1f1;
 }
 .illustration {
-    position: absolute;
-    top: 20%;
-    right: 7%;
-    display: flex;
-    width: 40%;
-    height: auto;
     transition: 0.3s ease-out;
     animation: anim-illustration 2s infinite linear;
 }
@@ -97,31 +47,28 @@
 .logo_ets {
     position: absolute;
     top: 70%;
-    left: 10%;
-    width: 150px;
-    height: auto;
+    left: 5%;
+    width: 120px;
     border-radius: 50px;
     z-index: 4;
 }
 
 .nom_ets_ralaivao {
     background: linear-gradient(135deg, #54a576, #48765b);
-    color: white;
-    width: 480px;
-    height: auto;
-    position: absolute;
-    top: 73%;
-    left: 18%;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 0;
-    border: 1px solid white;
-    border-radius: 30px  0;
-    box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.5);
 }
 
 .nom_ets_ralaivao span {
     font-size: 1.5em;
     font-weight: bold;
+}
+
+@media screen and ( min-width: 640px ) {
+    .logo_ets {
+        position: absolute;
+        top: 70%;
+        left: 10%;
+        width: 150px;
+        border-radius: 50px;
+        z-index: 4;
+    }
 }

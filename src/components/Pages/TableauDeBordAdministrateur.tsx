@@ -60,8 +60,8 @@ const TableauDeBordAdministrateur: React.FC = () => {
         </div>
 
         <div className="bouton_deconnexion hover:scale-110" onClick={handleDeconnexion}>
-          <div className="pl-4">Se déconnecter</div>
-          <div className="pl-4 pr-4"><FaSignOutAlt /></div>
+          <div className="pl-4 hidden lg:block">Se déconnecter</div>
+          <div className="pl-4 pr-4 text-2xl lg:text-base"><FaSignOutAlt /></div>
         </div>
       </div>
 
@@ -71,16 +71,17 @@ const TableauDeBordAdministrateur: React.FC = () => {
           <section id="section1" className="section1 pt-[120px] h-screen w-screen">
             <div>
               <div className="flex item-center">
-                <div className="w-[100px] h-[100px] m-[20px] bg-white rounded-[50%]"> </div>
-                <img src="/utils/admin.jpg" className=" w-[22%] h-auto rounded-[50%]" alt="admin" />
-                <div className="w-[100px] h-[100px] m-[20px] bg-white rounded-[50%]"> </div>
+                <div className="w-[40px] h-[40px] lg:w-[100px] lg:h-[100px] m-[20px] bg-white rounded-[50%]"> </div>
+                <img src="/utils/admin.jpg" className=" w-[55%] lg:w-[22%] h-auto rounded-[50%]" alt="admin" />
+                <div className="w-[40px] h-[40px] lg:w-[100px] lg:h-[100px] m-[20px] bg-white rounded-[50%]"> </div>
               </div>
               
-            <h2 className="text-2xl font-bold mb-0 mt-4">Effectif des utilisateurs</h2>
+            <h2 className="text-2xl font-bold mb-0 mt-4 pt-[7%] lg:pt-[3%]">Effectif des utilisateurs</h2>
               <Effectif />
               {/* <ChartTableauDeBord /> */}
             </div>
           </section>
+
           <section id="section2" className="section2 pt-[100px] w-screen h-screen">
             <div className="p-[10px] overflow-hidden flex">
               <ListesUtilisateurs />
@@ -91,6 +92,7 @@ const TableauDeBordAdministrateur: React.FC = () => {
               <ListeGroupe />
             </div>
           </section>
+          
         </div>
 
         <div className={"sidebar" + active + " w-[250px]"}>

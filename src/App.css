@@ -1,0 +1,13 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* sm: 640px (Small devices like tablets)
+md: 768px (Medium devices like small laptops)
+lg: 1024px (Large devices like laptops)
+xl: 1280px (Extra large devices like desktops)
+2xl: 1536px (2X large devices like larger desktops) */

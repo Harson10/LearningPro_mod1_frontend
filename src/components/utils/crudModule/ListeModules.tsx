@@ -147,31 +147,33 @@ const ListeModules: React.FC = () => {
     <div>
       <h2 className="text-2xl font-bold mb-4">Gestion des modules</h2>
 
-      <div className="flex mb-[20px] w-[95%]">
+      <div className="flex flex-col lg:flex-row mb-5 w-full lg:w-[95%] items-center justify-center">
         <button
           type="button"
-          className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] p-[8px] rounded-[50px]"
+          className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] rounded-[50px] p-2 mb-5 mr-[50px] lg:mb-0 lg:mr-8"
           onClick={handleCreerModule}
         >
           <div className="pl-4">Creer</div>
-          <div className="pl-2 rounded-full items-center justify-center"><FaPlus className="pr-2 w-[30px] h-[30px] p-[10%]" /></div>
+          <div className="pl-2 rounded-full items-center justify-center"><FaPlus className="pr-2 w-[30px]" /></div>
         </button>
 
-        <input
-          className="input_recherche w-[250px] ml-[40%]"
-          type="text"
-          placeholder='Nom de module...'
-          value={chercherCode}
-          onChange={handleRecherche}
-        />
-
-        <FaSearch className="ml-[-50px] z-10 text-gray-400" />
+        <div className="flex items-center justify-center w-[250px] mb-5 lg:mb-0 mr-[10px]lg:mr-0">
+          <input
+            className="input_recherche w-full p-2"
+            type="text"
+            placeholder="Chercher ..."
+            value={chercherCode}
+            onChange={handleRecherche}
+          />
+          <FaSearch className="text-gray-400 ml-[-50px] z-10" />
+        </div>
       </div>
+
 
       <div className="w-screen h-auto flex flex-wrap items-center">
 
         {modulesTrouve.map((module: any) => (
-          <div className="shadow-xl w-[30%] h-[100%] rounded-[30px] p-2 bg-white m-[1%]">
+          <div className="shadow-xl w-full sm:w-[48%] md:w-[30%] h-auto rounded-[30px] p-2 bg-white m-[3%] lg:m-[1%]">
             <div className="bg-green-700 w-[100%] h-[20%] m-0 titre_module rounded-[25px] p-2 text-white">
               <div key={module.code_module} className="flex items-center">
                 <div className="p-4">{module.nom_module} </div> | <div className="p-4">{module.cout_module} Ar</div>

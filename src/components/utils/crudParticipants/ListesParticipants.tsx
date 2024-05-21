@@ -151,7 +151,7 @@ const ListesParticipants: React.FC = () => {
 
     const handleRecherche = (e: ChangeEvent<HTMLInputElement>) => {
         const valeurCherchee = e.target.value.toLowerCase();
-    
+
         if (valeurCherchee === "") {
             // Si la recherche est vide, réinitialisez l'affichage complet
             setChercherCode("");
@@ -160,7 +160,7 @@ const ListesParticipants: React.FC = () => {
             const utilisateursTrouves = utilisateurs.map((utilisateur) => {
                 const participant = participantsMap.get(utilisateur.code_utilisateur);
                 const groupe = participant ? groupesMap.get(participant.code_groupe) : undefined;
-    
+
                 return {
                     ...utilisateur,
                     participant,
@@ -182,129 +182,130 @@ const ListesParticipants: React.FC = () => {
                     .toLowerCase()
                     .includes(valeurCherchee)
             );
-    
+
             setChercherCode(valeurCherchee);
             setUtilisateursTrouve(utilisateursTrouves);
         }
     };
-    
-    
-    
-    
-    
 
-        return (
-            <div className="w-screen">
-                <h2 className="text-2xl font-bold mb-4">Gestion des participants</h2>
 
-                <div className="flex mb-[20px] w-[100%]">
-                    <button
-                        type="button"
-                        className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 w-[250px] p-[8px] rounded-[50px] bouton_insc_liste "
-                        onClick={handleInscrireUtilisateur}
-                    >
-                        <div className="pl-4">Inscrire</div>
-                        <div className="pl-2 rounded-full items-center justify-center"><FaUserPlus className="pr-2 w-[30px] h-[30px] p-[10%]" /></div>
-                    </button>
 
+
+
+
+    return (
+        <div className="w-screen">
+            <h2 className="text-2xl font-bold mb-4">Gestion des participants</h2>
+
+            <div className="flex flex-col lg:flex-row mb-5 w-full lg:w-[95%] items-center justify-center">
+                <button
+                    type="button"
+                    className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] rounded-[50px] p-2 mb-5 mr-[50px] lg:mb-0 lg:mr-8"
+                    onClick={handleInscrireUtilisateur}
+                >
+                    <div className="pl-4">Inscrire</div>
+                    <div className="pl-2 rounded-full items-center justify-center"><FaUserPlus className="pr-2 w-[30px]" /></div>
+                </button>
+
+                <div className="flex items-center justify-center w-[250px] mb-5 lg:mb-0 mr-[10px]lg:mr-0">
                     <input
-                        className="input_recherche w-[250px] ml-[40%]"
+                        className="input_recherche w-full p-2"
                         type="text"
-                        placeholder='Chercher ...'
+                        placeholder="Chercher ..."
                         value={chercherCode}
                         onChange={handleRecherche}
                     />
-
-                    <FaSearch className="ml-[-50px] z-10 text-gray-400" />
-                </div>
-
-                <div className="table-container overflow-x-auto bottom-0">
-                    <table className="min-w-full m-[3%] ml-4 bg-white border border-gray-300">
-                        <thead>
-                            <tr className="bg-gray-100">
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Role</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Nom</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Prénom</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Adresse</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Sexe</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Profession</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Date de Naissance</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Lieu de Naissance</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Num CIN</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Nom du Tuteur</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Prénom du Tuteur</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Niveau</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Diplôme</th>
-                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Groupe</th>
-                                <th className="border border-gray-300 whitespace-nowrap">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="hover:bg-white">
-                            {utilisateursTrouve.map((utilisateur: any) => (
-                                <tr key={utilisateur.code_utilisateur} className="hover:bg-white">
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.role}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.nom}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.prenom}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.adresse}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.sexe}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.profession}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{new Date(utilisateur.participant?.dateNaiss).toLocaleDateString('fr-FR')}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.lieuNaiss}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.numCIN}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.nomTuteur}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.prenomTuteur}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.niveau}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.diplome}</td>
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">
-                                        {utilisateur.groupe ? utilisateur.groupe.nom_groupe : "-"}
-                                    </td>
-
-                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 flex items-center pl-4">
-                                        <button
-                                            className="bg-gradient-to-br from-green-900 via-green-500 to-green-900 flex text-white border border-white 
-                                        py-1 px-2 w-[170px] p-[20px] rounded-[50px] hover:scale-110 mr-4"
-                                        >
-                                            <div className="pl-6">
-                                                <Link to={`/participant/modifier/${utilisateur.code_utilisateur}/${utilisateur.participant?.code_participant}`}>
-                                                    Modifier
-                                                </Link>
-                                            </div>
-                                            <div className="pl-2 items-center justify-center">
-                                                <FaPencilAlt className="pr-2 w-[30px] h-[30px] p-[10%]" />
-                                            </div>
-                                        </button>
-
-                                        <button
-                                            className="bg-gradient-to-br from-red-900 via-red-500 to-red-900 flex text-white border border-white 
-                                        py-1 px-2 w-[170px] rounded-[50px] hover:scale-110"
-                                            type="button"
-                                            onClick={() => handleSupprimerUtilisateur(utilisateur.code_utilisateur)}
-                                        >
-                                            <div className="pl-4">Supprimer</div>
-                                            <div className="pl-2 pr-2 items-center justify-center mr-2">
-                                                <FaTrash className="pr-2 w-[30px] h-[30px] p-[10%]" />
-                                            </div>
-                                        </button>
-
-                                        <Validation
-                                            isOpen={etatConfirmation.estOuvert && etatConfirmation.codeUtilisateurASupprimer === utilisateur.code_utilisateur}
-                                            onConfirm={() => {
-                                                confirmerSuppressionUtilisateur(utilisateur.code_utilisateur, utilisateur.role);
-                                            }}
-                                            onCancel={annulerSuppressionUtilisateur}
-                                            message="Êtes-vous sûr de vouloir continuer la suppression ?"
-                                            bg_modal_show="bg-white shadow-sm"
-                                            style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
-                                            style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <FaSearch className="text-gray-400 ml-[-50px] z-10" />
                 </div>
             </div>
-        );
-    };
 
-    export default ListesParticipants;
+            <div className="table-container overflow-x-auto bottom-0">
+                <table className="min-w-full m-[3%] ml-4 bg-white border border-gray-300">
+                    <thead>
+                        <tr className="bg-gray-100">
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Role</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Nom</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Prénom</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Adresse</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Sexe</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Profession</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Date de Naissance</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Lieu de Naissance</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Num CIN</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Nom du Tuteur</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Prénom du Tuteur</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Niveau</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Diplôme</th>
+                            <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Groupe</th>
+                            <th className="border border-gray-300 whitespace-nowrap">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody className="hover:bg-white">
+                        {utilisateursTrouve.map((utilisateur: any) => (
+                            <tr key={utilisateur.code_utilisateur} className="hover:bg-white">
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.role}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.nom}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.prenom}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.adresse}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.sexe}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.profession}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{new Date(utilisateur.participant?.dateNaiss).toLocaleDateString('fr-FR')}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.lieuNaiss}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.numCIN}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.nomTuteur}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.prenomTuteur}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.niveau}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{utilisateur.participant?.diplome}</td>
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">
+                                    {utilisateur.groupe ? utilisateur.groupe.nom_groupe : "-"}
+                                </td>
+
+                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 flex items-center pl-4">
+                                    <button
+                                        className="bg-gradient-to-br from-green-900 via-green-500 to-green-900 flex text-white border border-white 
+                                        py-1 px-2 w-[170px] p-[20px] rounded-[50px] hover:scale-110 mr-4"
+                                    >
+                                        <div className="pl-6">
+                                            <Link to={`/participant/modifier/${utilisateur.code_utilisateur}/${utilisateur.participant?.code_participant}`}>
+                                                Modifier
+                                            </Link>
+                                        </div>
+                                        <div className="pl-2 items-center justify-center">
+                                            <FaPencilAlt className="pr-2 w-[30px] h-[30px] p-[10%]" />
+                                        </div>
+                                    </button>
+
+                                    <button
+                                        className="bg-gradient-to-br from-red-900 via-red-500 to-red-900 flex text-white border border-white 
+                                        py-1 px-2 w-[170px] rounded-[50px] hover:scale-110"
+                                        type="button"
+                                        onClick={() => handleSupprimerUtilisateur(utilisateur.code_utilisateur)}
+                                    >
+                                        <div className="pl-4">Supprimer</div>
+                                        <div className="pl-2 pr-2 items-center justify-center mr-2">
+                                            <FaTrash className="pr-2 w-[30px] h-[30px] p-[10%]" />
+                                        </div>
+                                    </button>
+
+                                    <Validation
+                                        isOpen={etatConfirmation.estOuvert && etatConfirmation.codeUtilisateurASupprimer === utilisateur.code_utilisateur}
+                                        onConfirm={() => {
+                                            confirmerSuppressionUtilisateur(utilisateur.code_utilisateur, utilisateur.role);
+                                        }}
+                                        onCancel={annulerSuppressionUtilisateur}
+                                        message="Êtes-vous sûr de vouloir continuer la suppression ?"
+                                        bg_modal_show="bg-white shadow-sm"
+                                        style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
+                                        style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
+
+export default ListesParticipants;

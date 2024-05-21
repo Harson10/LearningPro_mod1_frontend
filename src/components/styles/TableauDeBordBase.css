@@ -1,8 +1,3 @@
-/* src/components/styles/TableauDeBordBase.css */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
 body {
   font-family: "Roboto", sans-serif;
   margin: 0;
@@ -17,7 +12,6 @@ body {
   display: flex;
   height: 100vh;
   flex-direction: column;
-
 }
 
 .top-bloc {
@@ -42,11 +36,12 @@ body {
 
 .bouton_deconnexion {
   position: fixed;
-  top: 10px;
-  right: 20px;
+  top: 20px;
+  right: 10px;
   cursor: pointer;
+  height: 50px;
   justify-content: center;
-  padding: 5px 20px 5px 20px;
+  padding: 2px;
   font-size: 0.9em;
   display: flex;
   align-items: center;
@@ -99,7 +94,7 @@ body {
 }
 
 .sections section {
-  background:  rgba(122, 149, 155, 0.7);
+  background: rgba(122, 149, 155, 0.7);
 }
 
 .sections section div {
@@ -113,8 +108,8 @@ body {
 .nav-toggler {
   position: fixed;
   z-index: 5;
-  top: 10px;
-  left: 105px;
+  top: 25px;
+  left: 20px;
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -201,3 +196,59 @@ body {
   z-index: 2;
 }
 
+@media screen and (min-width: 640px) {
+
+  .nav-toggler {
+    position: fixed;
+    z-index: 5;
+    top: 25px;
+    left: 105px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+  }
+
+  .sidebar {
+    box-sizing: border-box;
+    position: fixed;
+    margin-top: 55px;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(90deg, rgb(2, 74, 23), rgb(29, 174, 85), rgb(2, 74, 23));
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out, t;
+    color: #fff;
+    overflow-y: auto;
+  }
+
+
+  .bouton_deconnexion {
+    position: fixed;
+    top: 25px;
+    right: 20px;
+    height: auto;
+    cursor: pointer;
+    justify-content: center;
+    padding: 5px 20px 5px 20px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+    border: 1px solid white;
+    border-radius: 30px;
+    font-family: sans-serif;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(122, 149, 155, 0.6), rgba(122, 149, 155, 1));
+    z-index: 10;
+  }
+  
+}

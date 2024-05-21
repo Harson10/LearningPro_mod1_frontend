@@ -19,11 +19,11 @@ const ListGroupe: React.FC = () => {
     const [chercherCode, setChercherCode] = useState<string>('');
     const redirection = useNavigate();
     const [etatConfirmation, setEtatConfirmation] = useState<{
-      estOuvert: boolean;
-      codeGroupeASupprimer: number | null;
+        estOuvert: boolean;
+        codeGroupeASupprimer: number | null;
     }>({
-      estOuvert: false,
-      codeGroupeASupprimer: null,
+        estOuvert: false,
+        codeGroupeASupprimer: null,
     });
 
     const afficherGroupe = async () => {
@@ -49,8 +49,8 @@ const ListGroupe: React.FC = () => {
 
     const handleSupprimerGroupe = async (codeGroupe: number) => {
         setEtatConfirmation({
-          estOuvert: true,
-          codeGroupeASupprimer: codeGroupe,
+            estOuvert: true,
+            codeGroupeASupprimer: codeGroupe,
         });
     }
 
@@ -62,8 +62,8 @@ const ListGroupe: React.FC = () => {
             setEtatConfirmation({
                 estOuvert: false,
                 codeGroupeASupprimer: null,
-              });
-            
+            });
+
         } catch (error) {
             console.error("Erreur lors de la suppression du Groupe :", error);
         }
@@ -83,7 +83,7 @@ const ListGroupe: React.FC = () => {
 
         const trouve = groupes.filter(
             (groupe) =>
-            groupe.nom_groupe.toLowerCase().includes(valeurCherchee)
+                groupe.nom_groupe.toLowerCase().includes(valeurCherchee)
 
         );
         setGroupeTrouve(valeurCherchee ? trouve : groupes);
@@ -93,92 +93,105 @@ const ListGroupe: React.FC = () => {
 
 
     return (
-        <div>
-            <div className="flex">
-                <button
-                    type="button"
-                    className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] p-[8px] rounded-[50px]"
-                    onClick={handleInscrireGroupe}
-                >
-                    <div className="pl-4">Creer un groupe</div>
-                    <div className="pl-2 rounded-full items-center justify-center"><FaUserPlus className="pr-2 w-[30px] h-[30px] p-[10%]" /></div>
-                </button>
-
-                <input
-                    className="input_recherche w-[250px] ml-[40%]"
-                    type="text"
-                    placeholder='Chercher ...'
-                    value={chercherCode}
-                    onChange={handleRecherche}
-                />
-
-                <FaSearch className="ml-[-50px] z-10 text-gray-400" />
-            </div>
+        <div className="w-screen">
 
             <h2 className="text-2xl font-bold mb-4">Liste des groupe</h2>
-            <div className="flex items-center">
-                <table className="min-w-auto bg-white border border-gray-300">
-                    <thead>
-                        <tr className="bg-gray-100">
-                            <th className="border border-gray-300 py-2 px-4">code</th>
-                            <th className="border border-gray-300 py-2 px-4">nom groupe</th>
-                            <th className="border border-gray-300">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody className="hover:bg-white">
-                        {groupeTrouve.map((groupe: any) => (
-                            <tr key={groupe.code_groupe} className="hover:bg-white">
-                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{groupe.code_groupe}</td>
-                                <td className="bg-sky-100 border border-gray-300 py-2 px-4">{groupe.nom_groupe}</td>
 
-                                <td className="bg-sky-100 border border-gray-300 py-2 px-4 flex items-center pl-4">
-                                    <button
-                                        className="bg-gradient-to-br from-green-900 via-green-500 to-green-900 flex text-white border border-white 
-                                            py-1 px-2 w-[170px] p-[20px] rounded-[50px] hover:scale-110 mr-4"
-                                    >
-                                        <div className="pl-6">
-                                            <Link to={`/groupe/modifier/${groupe.code_groupe}`}>
-                                                Modifier
-                                            </Link>
-                                        </div>
-                                        <div className="pl-2 items-center justify-center">
-                                            <FaPencilAlt className="pr-2 w-[30px] h-[30px] p-[10%]" />
-                                        </div>
-                                    </button>
+            <div className="flex flex-col lg:flex-row mb-5 w-full lg:w-[95%] items-center justify-center">
+                <button
+                    type="button"
+                    className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] rounded-[50px] p-2 mb-5 mr-[50px] lg:mb-0 lg:mr-8"
+                    onClick={handleInscrireGroupe}
+                >
+                    <div className="pl-4">Nouveau</div>
+                    <div className="pl-2 rounded-full items-center justify-center"><FaUserPlus className="pr-2 w-[30px]" /></div>
+                </button>
 
-                                    <button
-                                        className="bg-gradient-to-br from-red-900 via-red-500 to-red-900 flex text-white border border-white 
-                                            py-1 px-2 w-[170px] rounded-[50px] hover:scale-110"
-                                        type="button"
-                                        onClick={() => {handleSupprimerGroupe(groupe.code_groupe);
-                                        }}
-                                    >
-                                        <div className="pl-4">Supprimer</div>
-                                        <div className="pl-2 pr-2 items-center justify-center mr-2">
-                                            <FaTrash className="pr-2 w-[30px] h-[30px] p-[10%]" />
-                                        </div>
-                                    </button>
+                <div className="flex items-center justify-center w-[250px] mb-5 lg:mb-0 mr-[10px]lg:mr-0">
+                    <input
+                        className="input_recherche w-full p-2"
+                        type="text"
+                        placeholder="Chercher ..."
+                        value={chercherCode}
+                        onChange={handleRecherche}
+                    />
+                    <FaSearch className="text-gray-400 ml-[-50px] z-10" />
+                </div>
+            </div>
 
-                                    <Validation 
-                                        isOpen={etatConfirmation.estOuvert && etatConfirmation.codeGroupeASupprimer === groupe.code_groupe}
-                                        onConfirm={() => {
-                                            confirmerSuppressionGroupe(groupe.code_groupe);
-                                        }}
-                                        onCancel={annulerSuppressionGroupe}
-                                        message="Êtes-vous sur de vouloir la suppréssion"
-                                        bg_modal_show="bg-white shadow-sm"
-                                        style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
-                                        style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
-                                    />
-                                </td>
 
+            <div className="flex justify-center">
+                <div className="table-container overflow-x-auto bottom-0 mx-1/2 translate-y-[-1/2] ">
+                    <table className="min-w-auto lg:min-w-auto mr-6 ml-4 bg-white border border-gray-300">
+                        <thead>
+                            <tr className="bg-gray-100">
+                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">code</th>
+                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">nom groupe</th>
+                                <th className="border border-gray-300 py-2 px-4 whitespace-nowrap">Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className="hover:bg-white">
+                            {groupeTrouve.map((groupe: any) => (
+                                <tr key={groupe.code_groupe} className="hover:bg-white">
+                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{groupe.code_groupe}</td>
+                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap">{groupe.nom_groupe}</td>
+
+                                    <td className="bg-sky-100 border border-gray-300 py-2 px-4 whitespace-nowrap flex items-center pl-4">
+                                        <button
+                                            className="bg-gradient-to-br from-green-900 via-green-500 to-green-900 flex text-white border border-white 
+                                            py-1 px-2 w-[170px] p-[20px] rounded-[50px] hover:scale-110 mr-4"
+                                        >
+                                            <div className="pl-6">
+                                                <Link to={`/groupe/modifier/${groupe.code_groupe}`}>
+                                                    Modifier
+                                                </Link>
+                                            </div>
+                                            <div className="pl-2 items-center justify-center">
+                                                <FaPencilAlt className="pr-2 w-[30px] h-[30px] p-[10%]" />
+                                            </div>
+                                        </button>
+
+                                        <button
+                                            className="bg-gradient-to-br from-red-900 via-red-500 to-red-900 flex text-white border border-white 
+                                            py-1 px-2 w-[170px] rounded-[50px] hover:scale-110"
+                                            type="button"
+                                            onClick={() => {
+                                                handleSupprimerGroupe(groupe.code_groupe);
+                                            }}
+                                        >
+                                            <div className="pl-4">Supprimer</div>
+                                            <div className="pl-2 pr-2 items-center justify-center mr-2">
+                                                <FaTrash className="pr-2 w-[30px] h-[30px] p-[10%]" />
+                                            </div>
+                                        </button>
+
+                                        <Validation
+                                            isOpen={etatConfirmation.estOuvert && etatConfirmation.codeGroupeASupprimer === groupe.code_groupe}
+                                            onConfirm={() => {
+                                                confirmerSuppressionGroupe(groupe.code_groupe);
+                                            }}
+                                            onCancel={annulerSuppressionGroupe}
+                                            message="Êtes-vous sur de vouloir la suppréssion"
+                                            bg_modal_show="bg-white shadow-sm"
+                                            style_pers_confirm="border border-gray-300 rounded-[8px] hover:bg-red-500 hover:text-white"
+                                            style_pers_cancel="border border-gray-300 rounded-[8px] hover:bg-gray-400 hover:text-white"
+                                        />
+                                    </td>
+
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );
 };
 
 export default ListGroupe;
+
+
+
+
+
+

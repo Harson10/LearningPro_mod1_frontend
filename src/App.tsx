@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./App.css";
 import TableauDeBordAdministrateur from "./components/Pages/TableauDeBordAdministrateur";
 import Acceuil from "./components/Pages/Acceuil";
 import FormulaireConnexion from "./components/Pages/FormulaireConnexion";
@@ -21,7 +22,7 @@ import FormulairePaiement from "./components/utils/crudPaiement/FormulairePaieme
 import FormulaireModifPaiement from "./components/utils/crudPaiement/FormulaireModifPaiement";
 import AjoutEtapeContenu from "./components/utils/crudEtape/AjoutEtapeContenu";
 import ModifierEtapeContenu from "./components/utils/crudEtape/ModifierEtapeContenu";
-import ListeEtapeContenuParticipant from "./components/utils/crudEtape/ListeEtapeContenuParticipant";
+// import ListeEtapeContenuParticipant from "./components/utils/crudEtape/ListeEtapeContenuParticipant";
 import PageParticipantB from "./components/Pages/PageParticipantB";
 
 function App() {

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
 import { FaArrowLeft, FaSearch } from "react-icons/fa";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import PDFViewer from "../PDFViewer";
 
 interface Etape {
   num_etape: number;
@@ -9,7 +10,10 @@ interface Etape {
   texte: string;
   code_module: string;
   module: string;
+  pdf: string;
+  // pdf_path: string;
 }
+
 
 const ListeEtapeContenuParticipant: React.FC = () => {
   const { code_module } = useParams();
@@ -36,6 +40,8 @@ const ListeEtapeContenuParticipant: React.FC = () => {
     affichage();
   }, [code_module]);
 
+  console.log('Étapes chargées :', etapes);
+
   const handleRecherche = (e: ChangeEvent<HTMLInputElement>) => {
     const valeurCherchee = e.target.value.toLowerCase();
     setChercherNom(valeurCherchee);
@@ -52,10 +58,11 @@ const ListeEtapeContenuParticipant: React.FC = () => {
   return (
     <div className="pt-[50px]">
 
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row mb-5 w-full lg:w-[95%] items-center justify-center">
+
         <button
           type="button"
-          className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] p-[8px] rounded-[50px]"
+          className="bg-gradient-to-br from-gray-500 via-gray-400 to-gray-600 bouton_insc_liste w-[250px] rounded-[50px] p-2 mb-5 mr-[50px] lg:mb-0 lg:mr-8"
           onClick={() => { window.history.back() }}
         >
           <div className="pl-4">Retour</div>
@@ -64,15 +71,16 @@ const ListeEtapeContenuParticipant: React.FC = () => {
           </div>
         </button>
 
-        <input
-          className="input_recherche w-[250px] ml-[40%]"
-          type="text"
-          placeholder="Chercher ..."
-          value={chercherNom}
-          onChange={handleRecherche}
-        />
-
-        <FaSearch className="ml-[-50px] z-10 text-gray-400" />
+        <div className="flex items-center justify-center w-[250px] mb-5 lg:mb-0 mr-[10px]lg:mr-0">
+          <input
+            className="input_recherche w-full p-2"
+            type="text"
+            placeholder="Chercher ..."
+            value={chercherNom}
+            onChange={handleRecherche}
+          />
+          <FaSearch className="text-gray-400 ml-[-50px] z-10" />
+        </div>
       </div>
 
       <h2 className="text-2xl font-bold mb-4">Publications</h2>
@@ -94,6 +102,15 @@ const ListeEtapeContenuParticipant: React.FC = () => {
               <div className="bg-white text-left text-gray-700 w-[96%] h-[76%] m-[2%]">
                 {etape.texte}
               </div>
+
+              {etape.pdf && (
+                // {etape.pdf_path && (
+                <div className="bg-white text-gray-700 w-[96%] h-[76%] m-[2%]">
+                  <PDFViewer pdfUrl={`http://localhost:4000/${etape.pdf}`} />
+                  {/* <PDFViewer pdfUrl={`http://localhost:4000/${etape.pdf_path}`} /> */}
+                </div>
+              )}
+
             </div>
 
           </div>
