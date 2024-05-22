@@ -47,8 +47,8 @@
 .logo_ets {
     position: absolute;
     top: 70%;
-    left: 5%;
-    width: 120px;
+    left: 2%;
+    width: 100px;
     border-radius: 50px;
     z-index: 4;
 }

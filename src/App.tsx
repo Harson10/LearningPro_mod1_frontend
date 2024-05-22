@@ -46,6 +46,9 @@ function App() {
       setRoleAPIFromChild(storedRole);
     }
 
+    console.log("IP: ", process.env.REACT_APP_ADR_IP_PC_SERVEUR);
+
+
   }, [token]);
 
   const redirectionElement = estAuthentifiee ? (

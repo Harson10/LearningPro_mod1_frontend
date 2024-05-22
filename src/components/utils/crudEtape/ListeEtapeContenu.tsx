@@ -30,7 +30,8 @@ const ListeEtapeContenu: React.FC = () => {
 
   const afficherEtapes = async () => {
     try {
-      const reponse = await axios.get<Etape[]>("http://localhost:4000/etape");
+      const reponse = await axios.get<Etape[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/etape`);
+      // const reponse = await axios.get<Etape[]>("http://localhost:4000/etape");
       console.log("res.data:", reponse.data);
       setEtapes(reponse.data);
       setEtapeTrouvee(reponse.data);
@@ -56,7 +57,8 @@ const ListeEtapeContenu: React.FC = () => {
 
   const confirmerSuppressionEtape = async (num_etape: number) => {
     try {
-      await axios.delete(`http://localhost:4000/etape/supprimer/${num_etape}`);
+      await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/etape/supprimer/${num_etape}`);
+      // await axios.delete(`http://localhost:4000/etape/supprimer/${num_etape}`);
       await afficherEtapes();
       setEtapes(etapes.filter((etape) => etape.num_etape !== num_etape));
       setEtatConfirmation({
@@ -134,7 +136,8 @@ const ListeEtapeContenu: React.FC = () => {
               
               {etape.pdf_path && (
                 <div className="bg-white text-gray-700 w-[96%] h-[76%] m-[2%]">
-                  <PDFViewer pdfUrl={`http://localhost:4000/${etape.pdf_path}`} />
+                <PDFViewer pdfUrl={`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/${etape.pdf_path}`} />
+                  {/* <PDFViewer pdfUrl={`http://localhost:4000/${etape.pdf_path}`} /> */}
                 </div>
               )}
 

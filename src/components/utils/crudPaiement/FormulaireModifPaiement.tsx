@@ -53,7 +53,8 @@ const FormulaireModifPaiement: React.FC = () => {
   useEffect(() => {
     const affichage = async () => {
       try {
-        const reponse = await axios.get<Paiement>(`http://localhost:4000/paiement/${num_facture}`);
+        const reponse = await axios.get<Paiement>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/paiement/${num_facture}`);
+        // const reponse = await axios.get<Paiement>(`http://localhost:4000/paiement/${num_facture}`);
         setPaiements(reponse.data);
         console.log("reponse.data.transaction_formation: ", reponse.data.transaction_formation.code_formation);
         setDatePaiement(String(reponse.data.date_paiement));
@@ -88,7 +89,8 @@ const FormulaireModifPaiement: React.FC = () => {
     };
 
     try {
-      const reqUpdatePaiement = await axios.put(`http://localhost:4000/paiement/modifier/${num_facture}`, infoPaiements);
+      const reqUpdatePaiement = await axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/paiement/modifier/${num_facture}`, infoPaiements);
+      // const reqUpdatePaiement = await axios.put(`http://localhost:4000/paiement/modifier/${num_facture}`, infoPaiements);
       console.log('Paiement à jour : ', reqUpdatePaiement.data);
       window.history.back();
     } catch (error) {

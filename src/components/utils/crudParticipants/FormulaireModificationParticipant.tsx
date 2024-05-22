@@ -28,11 +28,13 @@ const ModifierParticipant: React.FC = () => {
   useEffect(() => {
     const afficherUtilisateur = async () => {
       try {
-        const reponse = await axios.get(`http://localhost:4000/utilisateur/${code_utilisateur}`);
+        const reponse = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/${code_utilisateur}`);
+        // const reponse = await axios.get(`http://localhost:4000/utilisateur/${code_utilisateur}`);
         const Utilisateur = reponse.data;
         setInfoUtilisateur(Utilisateur);
 
-        const reponse2 = await axios.get(`http://localhost:4000/participant/${code_participant}`);
+        const reponse2 = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/participant/${code_participant}`);
+        // const reponse2 = await axios.get(`http://localhost:4000/participant/${code_participant}`);
         const Participant = reponse2.data;
         setInfoParticipant(Participant);
       } catch (error) {
@@ -64,8 +66,10 @@ const ModifierParticipant: React.FC = () => {
     setShowConfirmationDialog(false);
 
     try {
-      const reponse = await axios.put(`http://localhost:4000/utilisateur/modifier/${code_utilisateur}`, infoUtilisateur);
-      const reponse2 = await axios.put(`http://localhost:4000/participant/modifier/${code_participant}`, infoParticipant);
+      const reponse = await axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/modifier/${code_utilisateur}`, infoUtilisateur);
+      // const reponse = await axios.put(`http://localhost:4000/utilisateur/modifier/${code_utilisateur}`, infoUtilisateur);
+      const reponse2 = await axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/participant/modifier/${code_participant}`, infoParticipant);
+      // const reponse2 = await axios.put(`http://localhost:4000/participant/modifier/${code_participant}`, infoParticipant);
 
       console.log('Utilisateur mis à jour : ', reponse.data);
       console.log('Utilisateur mis à jour : ', reponse2.data);

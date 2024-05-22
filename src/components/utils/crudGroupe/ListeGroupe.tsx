@@ -28,7 +28,8 @@ const ListGroupe: React.FC = () => {
 
     const afficherGroupe = async () => {
         try {
-            const reponse = await axios.get<Groupe[]>("http://localhost:4000/groupe");
+            const reponse = await axios.get<Groupe[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/groupe`);
+            // const reponse = await axios.get<Groupe[]>("http://localhost:4000/groupe");
             setGroupes(reponse.data);
             setGroupeTrouve(reponse.data);
         } catch (error) {
@@ -56,7 +57,8 @@ const ListGroupe: React.FC = () => {
 
     const confirmerSuppressionGroupe = async (code_groupe: number) => {
         try {
-            await axios.delete(`http://localhost:4000/groupe/supprimer/${code_groupe}`);
+            await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/groupe/supprimer/${code_groupe}`);
+            // await axios.delete(`http://localhost:4000/groupe/supprimer/${code_groupe}`);
             await afficherGroupe();
             setGroupes(groupes.filter(groupe => groupe.code_groupe !== code_groupe));
             setEtatConfirmation({

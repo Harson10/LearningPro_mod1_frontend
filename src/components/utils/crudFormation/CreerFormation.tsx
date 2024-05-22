@@ -36,7 +36,8 @@ const CreerFormation: React.FC = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:4000/formation/creer', nouvelleFormation);
+            const response = await axios.post(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/creer`, nouvelleFormation);
+            // const response = await axios.post('http://localhost:4000/formation/creer', nouvelleFormation);
             console.log('Formation créée avec succès', response.data);
         } catch (error) {
             setPopupStyle("popup_connexion");

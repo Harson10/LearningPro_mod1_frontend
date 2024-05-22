@@ -29,7 +29,8 @@ const CreerModule: React.FC = () => {
 
     useEffect(() => {
         // Récupérer les formations
-        axios.get<Formation[]>('http://localhost:4000/formation/')
+        axios.get<Formation[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/`)
+        // axios.get<Formation[]>('http://localhost:4000/formation/')
             .then(response => {
                 if (response.data && Array.isArray(response.data)) {
                     setFormations(response.data);
@@ -65,16 +66,19 @@ const CreerModule: React.FC = () => {
             const code_formation = nouveauModule.code_formation;
             console.log('Code de formation: ', code_formation)
 
-            const response = await axios.post('http://localhost:4000/module/creer', nouveauModule);
+            const response = await axios.post(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module/creer`, nouveauModule);
+            // const response = await axios.post('http://localhost:4000/module/creer', nouveauModule);
             console.log('Module créé avec succès', response.data);
 
 
-            const cout_actuelle_formation = await axios.get(`http://localhost:4000/module/somme_cout_par_formation/${code_formation}`);
+            const cout_actuelle_formation = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module/somme_cout_par_formation/${code_formation}`);
+            // const cout_actuelle_formation = await axios.get(`http://localhost:4000/module/somme_cout_par_formation/${code_formation}`);
             console.log('Coup actuel', cout_actuelle_formation.data);
 
             const cout_formation_ = await cout_actuelle_formation.data;
 
-            const infoF = await axios.get(`http://localhost:4000/formation/${code_formation}`)
+            const infoF = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/${code_formation}`)
+            // const infoF = await axios.get(`http://localhost:4000/formation/${code_formation}`)
                 .catch(error => {
                     console.error('Erreur lors de la récupération des informations sur la formation :', error);
                     throw error;
@@ -94,7 +98,8 @@ const CreerModule: React.FC = () => {
 
                 setInfoFormation(newInfoFormation);
 
-                axios.put(`http://localhost:4000/formation/modifier/${code_formation}`, newInfoFormation);
+                axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/modifier/${code_formation}`, newInfoFormation);
+                // axios.put(`http://localhost:4000/formation/modifier/${code_formation}`, newInfoFormation);
 
                 return newInfoFormation;
             });

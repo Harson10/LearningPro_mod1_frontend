@@ -41,7 +41,8 @@ const FormulairePaiement: React.FC = () => {
 
 
   useEffect(() => {
-    axios.get<Formation[]>('http://localhost:4000/formation/')
+    axios.get<Formation[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/`)
+    // axios.get<Formation[]>('http://localhost:4000/formation/')
       .then(reponse => {
         if (reponse.data && Array.isArray(reponse.data)) {
           setFormations(reponse.data);
@@ -53,7 +54,8 @@ const FormulairePaiement: React.FC = () => {
       .catch(error => {
         console.log('Erreur lors de la récupération des données');
       });
-    axios.get<Participant[]>('http://localhost:4000/participant/')
+    axios.get<Participant[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/participant/`)
+    // axios.get<Participant[]>('http://localhost:4000/participant/')
       .then(reponse => {
         if (reponse.data && Array.isArray(reponse.data)) {
           setParticipant(reponse.data);
@@ -71,12 +73,14 @@ const FormulairePaiement: React.FC = () => {
     setChoixParticipant(e.target.value);
     const code_participant = parseInt(e.target.value);
 
-    axios.get<Participant>(`http://localhost:4000/participant/${code_participant}`)
+    axios.get<Participant>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/participant/${code_participant}`)
+    // axios.get<Participant>(`http://localhost:4000/participant/${code_participant}`)
       .then(response => {
         const code_utilisateur = response.data.code_utilisateur;
         setChoixUtilisateur(String(code_utilisateur));
 
-        axios.get<Utilisateur>(`http://localhost:4000/utilisateur/${code_utilisateur}`)
+        axios.get<Utilisateur>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/${code_utilisateur}`)
+        // axios.get<Utilisateur>(`http://localhost:4000/utilisateur/${code_utilisateur}`)
           .then((response) => {
             setUtilisateur(response.data);
           })
@@ -103,7 +107,8 @@ const FormulairePaiement: React.FC = () => {
       code_utilisateur: choixUtilisateur
     }
     try {
-      const reqPaiement = await axios.post("http://localhost:4000/paiement/creer/", nouveauPaiement);
+      const reqPaiement = await axios.post(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/paiement/creer/`, nouveauPaiement);
+      // const reqPaiement = await axios.post("http://localhost:4000/paiement/creer/", nouveauPaiement);
       console.log('Paiement enregistré avec succes', reqPaiement.data);
       window.history.back();
     } catch (error) {

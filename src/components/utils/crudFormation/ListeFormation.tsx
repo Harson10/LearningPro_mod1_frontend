@@ -27,7 +27,8 @@ const ListeFormations: React.FC = () => {
 
   const afficherFormations: any = async () => {
     try {
-      const reponse = await axios.get<Formation[]>("http://localhost:4000/formation");
+      const reponse = await axios.get<Formation[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation`);
+      // const reponse = await axios.get<Formation[]>("http://localhost:4000/formation");
       setFormations(reponse.data);
       setFormationsTrouvees(reponse.data);
     } catch (error) {
@@ -56,7 +57,8 @@ const ListeFormations: React.FC = () => {
 
   const confirmerSuppressionFormation = async (code_formation: number) => {
     try {
-      await axios.delete(`http://localhost:4000/formation/supprimer/${code_formation}`);
+      await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/supprimer/${code_formation}`);
+      // await axios.delete(`http://localhost:4000/formation/supprimer/${code_formation}`);
 
       await afficherFormations();
 

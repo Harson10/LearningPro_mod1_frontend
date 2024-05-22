@@ -13,10 +13,14 @@ const Effectif: React.FC = () => {
   useEffect(() => {
     const afficherInfo = async () => {
       try {
-        const responseTotal = await axios.get('http://localhost:4000/utilisateur/nombre/total');
-        const responseAdmin = await axios.get('http://localhost:4000/utilisateur/nombre/administrateur');
-        const responseFormateur = await axios.get('http://localhost:4000/utilisateur/nombre/formateur');
-        const responseParticipant = await axios.get('http://localhost:4000/utilisateur/nombre/participant');
+        const responseTotal = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/nombre/total`);
+        // const responseTotal = await axios.get('http://localhost:4000/utilisateur/nombre/total');
+        const responseAdmin = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/nombre/administrateur`);
+        // const responseAdmin = await axios.get('http://localhost:4000/utilisateur/nombre/administrateur');
+        const responseFormateur = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/nombre/formateur`);
+        // const responseFormateur = await axios.get('http://localhost:4000/utilisateur/nombre/formateur');
+        const responseParticipant = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/nombre/participant`);
+        // const responseParticipant = await axios.get('http://localhost:4000/utilisateur/nombre/participant');
 
         setTotalUtilisateurs(responseTotal.data);
         setAdministrateurs(responseAdmin.data);

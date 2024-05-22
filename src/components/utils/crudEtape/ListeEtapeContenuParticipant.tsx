@@ -24,7 +24,8 @@ const ListeEtapeContenuParticipant: React.FC = () => {
   const afficherEtapes = async (codeModule: any) => {
     const code_module = parseInt(codeModule);
     try {
-      const reponse = await axios.get<Etape[]>(`http://localhost:4000/etape/rapporter_par_module/${code_module}`);
+      const reponse = await axios.get<Etape[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/etape/rapporter_par_module/${code_module}`);
+      // const reponse = await axios.get<Etape[]>(`http://localhost:4000/etape/rapporter_par_module/${code_module}`);
       console.log("res.data:", reponse.data);
       setEtapes(reponse.data);
       setEtapeTrouvee(reponse.data);
@@ -106,7 +107,8 @@ const ListeEtapeContenuParticipant: React.FC = () => {
               {etape.pdf && (
                 // {etape.pdf_path && (
                 <div className="bg-white text-gray-700 w-[96%] h-[76%] m-[2%]">
-                  <PDFViewer pdfUrl={`http://localhost:4000/${etape.pdf}`} />
+                  <PDFViewer pdfUrl={`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/${etape.pdf}`} />
+                  {/* <PDFViewer pdfUrl={`http://localhost:4000/${etape.pdf}`} /> */}
                   {/* <PDFViewer pdfUrl={`http://localhost:4000/${etape.pdf_path}`} /> */}
                 </div>
               )}

@@ -55,16 +55,19 @@ const ListesParticipants: React.FC = () => {
 
     const affichage = async () => {
         try {
-            const utilisateursResponse = await axios.get<Utilisateur[]>("http://localhost:4000/utilisateur/role/participants");
+            const utilisateursResponse = await axios.get<Utilisateur[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/role/participants`);
+            // const utilisateursResponse = await axios.get<Utilisateur[]>("http://localhost:4000/utilisateur/role/participants");
             setUtilisateurs(utilisateursResponse.data);
 
-            const participantsResponse = await axios.get<Participant[]>("http://localhost:4000/participant");
+            const participantsResponse = await axios.get<Participant[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/participant`);
+            // const participantsResponse = await axios.get<Participant[]>("http://localhost:4000/participant");
             const participantsMap = new Map<number, Participant>();
             participantsResponse.data.forEach((participant) => {
                 participantsMap.set(participant.code_utilisateur, participant);
             });
 
-            const groupesResponse = await axios.get<Groupe[]>("http://localhost:4000/groupe");
+            const groupesResponse = await axios.get<Groupe[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/groupe`);
+            // const groupesResponse = await axios.get<Groupe[]>("http://localhost:4000/groupe");
             const groupesMap = new Map<number, Groupe>();
             groupesResponse.data.forEach((groupe) => {
                 groupesMap.set(groupe.code_groupe, groupe);
@@ -125,7 +128,8 @@ const ListesParticipants: React.FC = () => {
                 if (roleUtilisateur === "Participant") {
                     const presenceParticipant = async () => {
                         try {
-                            await axios.delete(`http://localhost:4000/participant/supprimer/par_utilisateur/${code_utilisateur}`);
+                            await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/participant/supprimer/par_utilisateur/${code_utilisateur}`);
+                            // await axios.delete(`http://localhost:4000/participant/supprimer/par_utilisateur/${code_utilisateur}`);
                         } catch (error) {
                             console.error("Erreur lors de la suppression du participant :", error);
                         }
@@ -134,7 +138,8 @@ const ListesParticipants: React.FC = () => {
                     await presenceParticipant();
                 }
             }
-            await axios.delete(`http://localhost:4000/utilisateur/supprimer/${code_utilisateur}`);
+            await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/supprimer/${code_utilisateur}`);
+            // await axios.delete(`http://localhost:4000/utilisateur/supprimer/${code_utilisateur}`);
 
             await affichage();
         } catch (error) {

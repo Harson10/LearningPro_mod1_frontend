@@ -20,14 +20,16 @@ const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({ onRoleAPI }) 
 
   const handleConnexion = async () => {
     try {
-      const reponse = await axios.post("http://localhost:4000/utilisateur/connexion", {
+      const reponse = await axios.post(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/connexion`, {
+      // const reponse = await axios.post("http://localhost:4000/utilisateur/connexion", {
         nom,
         prenom,
         mot_de_passe,
       });
       const { token, roleUtilisateur, codeUtilisateur } = reponse.data;
 
-      const reponseRole = await axios.get(`http://localhost:4000/role/${roleUtilisateur}`);
+      const reponseRole = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/role/${roleUtilisateur}`);
+      // const reponseRole = await axios.get(`http://localhost:4000/role/${roleUtilisateur}`);
       const roleAPI = reponseRole.data.role;
 
       localStorage.setItem("token", token);

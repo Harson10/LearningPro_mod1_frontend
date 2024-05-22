@@ -24,7 +24,8 @@ const FormulaireGroupe: React.FC = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/groupe/creer/', nouveauGroupe);
+      const response = await axios.post(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/groupe/creer/`, nouveauGroupe);
+      // const response = await axios.post('http://localhost:4000/groupe/creer/', nouveauGroupe);
       console.log('Groupe bien créé avec succès', response.data);
       window.history.back();
     } catch (error) {

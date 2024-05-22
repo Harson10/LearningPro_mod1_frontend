@@ -21,7 +21,8 @@ const ModifierUtilisateur = () => {
   useEffect(() => {
     const afficherUtilisateur = async () => {
       try {
-        const reponse = await axios.get(`http://localhost:4000/utilisateur/${code_utilisateur}`);
+        const reponse = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/${code_utilisateur}`);
+        // const reponse = await axios.get(`http://localhost:4000/utilisateur/${code_utilisateur}`);
         const Utilisateur = reponse.data;
         setInfoUtilisateur(Utilisateur);
       } catch (error) {
@@ -49,7 +50,8 @@ const ModifierUtilisateur = () => {
     setShowConfirmationDialog(false);
 
     try {
-      const reponse = await axios.put(`http://localhost:4000/utilisateur/modifier/${code_utilisateur}`, infoUtilisateur);
+      const reponse = await axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/modifier/${code_utilisateur}`, infoUtilisateur);
+      // const reponse = await axios.put(`http://localhost:4000/utilisateur/modifier/${code_utilisateur}`, infoUtilisateur);
 
       console.log('Utilisateur mis à jour : ', reponse.data);
       window.history.back();

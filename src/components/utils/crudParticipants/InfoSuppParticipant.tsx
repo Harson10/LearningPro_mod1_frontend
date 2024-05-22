@@ -28,7 +28,8 @@ const InfoSuppParticipant: React.FC = () => {
 
     useEffect(() => {
         // Récupérer le dernier utilisateur créé lors du montage du composant
-        axios.post<number>('http://localhost:4000/utilisateur/dernier_utilisateur')
+        axios.post<number>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/dernier_utilisateur`)
+        // axios.post<number>('http://localhost:4000/utilisateur/dernier_utilisateur')
             .then(response => {
                 if (response.data) {
                     console.log(response.data);
@@ -38,11 +39,12 @@ const InfoSuppParticipant: React.FC = () => {
                 }
             })
             .catch(error => {
-                console.error('Erreur lors de la récupération du code utilisateur du dernier utilisateur');
+                console.error(`Erreur lors de la récupération du code utilisateur du dernier utilisateur`);
             });
 
         // Récupérer les groupes
-        axios.get<Groupe[]>('http://localhost:4000/groupe/')
+        axios.get<Groupe[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/groupe/`)
+        // axios.get<Groupe[]>('http://localhost:4000/groupe/')
             .then(response => {
                 if (response.data && Array.isArray(response.data)) {
                     setGroupes(response.data);
@@ -78,7 +80,8 @@ const InfoSuppParticipant: React.FC = () => {
         };
 
         try {
-            const reponse = await axios.post('http://localhost:4000/participant/creer/', nouveauParticipant);
+            const reponse = await axios.post(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/participant/creer/`, nouveauParticipant);
+            // const reponse = await axios.post('http://localhost:4000/participant/creer/', nouveauParticipant);
             console.log('Participant bien créé avec succès', reponse.data);
             window.history.back();
             window.history.back();
@@ -99,7 +102,8 @@ const InfoSuppParticipant: React.FC = () => {
             <div className="relative w-full h-[10%]" onClick={() => {
                 window.history.back();
                 const code_utilisateur = dernierCodeUtilisateur;
-                axios.delete(`http://localhost:4000/utilisateur/supprimer/${code_utilisateur}`);
+                axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/supprimer/${code_utilisateur}`);
+                // axios.delete(`http://localhost:4000/utilisateur/supprimer/${code_utilisateur}`);
             }}>
                 <div className="flex relative w-full z-20">
                     <button className="retour absolute px-0 w-[180px] top-[9px] left-[10px] h-[35px] lg:px-8 lg:w-[250px] lg:top-[12.25px] lg:left-[30px] lg:h-[50px] rounded-[30px] text-white font-bold shadow-md shadow-gray-700 border-2 border-white flex items-center hover:bg-green-700">

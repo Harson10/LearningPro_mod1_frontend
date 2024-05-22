@@ -32,7 +32,8 @@ const ListesUtilisateurs: React.FC = () => {
 
   const afficherUtilisateurs = async () => {
     try {
-      const reponse = await axios.get<Utilisateur[]>("http://localhost:4000/utilisateur");
+      const reponse = await axios.get<Utilisateur[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur`);
+      // const reponse = await axios.get<Utilisateur[]>("http://localhost:4000/utilisateur");
       setUtilisateurs(reponse.data);
       setUtilisateursTrouve(reponse.data);
     } catch (error) {
@@ -64,7 +65,8 @@ const ListesUtilisateurs: React.FC = () => {
         if (roleUtilisateur === "Participant") {
           const presenceParticipant = async () => {
             try {
-              await axios.delete(`http://localhost:4000/participant/supprimer/par_utilisateur/${code_utilisateur}`);
+              await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/participant/supprimer/par_utilisateur/${code_utilisateur}`);
+              // await axios.delete(`http://localhost:4000/participant/supprimer/par_utilisateur/${code_utilisateur}`);
             } catch (error) {
               console.error("Erreur lors de la suppression du participant :", error);
             }
@@ -74,7 +76,8 @@ const ListesUtilisateurs: React.FC = () => {
         }
 
       }
-      await axios.delete(`http://localhost:4000/utilisateur/supprimer/${code_utilisateur}`);
+      await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/supprimer/${code_utilisateur}`);
+      // await axios.delete(`http://localhost:4000/utilisateur/supprimer/${code_utilisateur}`);
 
       await afficherUtilisateurs();
 

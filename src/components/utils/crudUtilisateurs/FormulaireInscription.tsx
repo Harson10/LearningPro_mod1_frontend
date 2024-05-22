@@ -33,7 +33,8 @@ const FormulaireInscription: React.FC = () => {
   ];
 
   useEffect(() => {
-    axios.get<Role[]>('http://localhost:4000/role/')
+    axios.get<Role[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/role/`)
+    // axios.get<Role[]>('http://localhost:4000/role/')
       .then(response => {
         if (response.data && Array.isArray(response.data)) {
           setRoles(response.data);
@@ -76,13 +77,15 @@ const FormulaireInscription: React.FC = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/utilisateur/creer', nouvelUtilisateur);
+      const response = await axios.post(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/utilisateur/creer`, nouvelUtilisateur);
+      // const response = await axios.post('http://localhost:4000/utilisateur/creer', nouvelUtilisateur);
       console.log(choixRole);
       console.log('Utilisateur bien créé avec succès', response.data);
 
       const toNumberRole = Number.parseInt(choixRole);
 
-      const reponseRole = await axios.get(`http://localhost:4000/role/${toNumberRole}`)
+      const reponseRole = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/role/${toNumberRole}`)
+      // const reponseRole = await axios.get(`http://localhost:4000/role/${toNumberRole}`)
       console.log(reponseRole.data.role);
 
       // Condition pour la redirection en fonction du choix de rôle

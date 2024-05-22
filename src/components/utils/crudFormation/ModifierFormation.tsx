@@ -19,7 +19,8 @@ const ModifierFormation = () => {
   useEffect(() => {
     const afficherFormation = async () => {
       try {
-        const reponse = await axios.get(`http://localhost:4000/formation/${code_formation}`);
+        const reponse = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/${code_formation}`);
+        // const reponse = await axios.get(`http://localhost:4000/formation/${code_formation}`);
         const formation = reponse.data;
   
         // Définir la valeur initiale de pub en fonction de la valeur de publication
@@ -73,7 +74,8 @@ const ModifierFormation = () => {
     };
 
     try {
-      const reponse = await axios.put(`http://localhost:4000/formation/modifier/${code_formation}`, infoFormationForDatabase);
+      const reponse = await axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/modifier/${code_formation}`, infoFormationForDatabase);
+      // const reponse = await axios.put(`http://localhost:4000/formation/modifier/${code_formation}`, infoFormationForDatabase);
 
       console.log('Formation mise à jour : ', reponse.data);
       window.history.back();

@@ -19,7 +19,8 @@ const ModifierEtapeContenu: React.FC = () => {
   useEffect(() => {
     const afficherEtape = async () => {
       try {
-        const reponse = await axios.get(`http://localhost:4000/etape/${num_etape}`);
+        const reponse = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/etape/${num_etape}`);
+        // const reponse = await axios.get(`http://localhost:4000/etape/${num_etape}`);
         const Etape = reponse.data;
         setInfoEtape({
           nom_etape: Etape.nom_etape,
@@ -27,7 +28,8 @@ const ModifierEtapeContenu: React.FC = () => {
           pdf_path: Etape.pdf_path, // Ajout de pdf_path
         });
         const code_module = reponse.data.code_module;
-        const reponseModule = await axios.get(`http://localhost:4000/module/${code_module}`);
+        const reponseModule = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module/${code_module}`);
+        // const reponseModule = await axios.get(`http://localhost:4000/module/${code_module}`);
         setModule(reponseModule.data.nom_module);
       } catch (error) {
         console.error(`Erreur lors de la récupération du module : `, error);
@@ -59,7 +61,8 @@ const ModifierEtapeContenu: React.FC = () => {
       if (pdfFile) {
         formData.append("pdf_path", pdfFile, pdfFile.name);
       }
-      const reponse = await axios.put(`http://localhost:4000/etape/modifier/${num_etape}`, formData, {
+      const reponse = await axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/etape/modifier/${num_etape}`, formData, {
+        // const reponse = await axios.put(`http://localhost:4000/etape/modifier/${num_etape}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

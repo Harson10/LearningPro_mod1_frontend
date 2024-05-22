@@ -50,7 +50,8 @@ const ListePaiement: React.FC = () => {
 
     const afficherPaiements = async () => {
         try {
-            const reponse = await axios.get<Paiement[]>("http://localhost:4000/paiement");
+            const reponse = await axios.get<Paiement[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/paiement`);
+            // const reponse = await axios.get<Paiement[]>("http://localhost:4000/paiement");
             setPaiements(reponse.data);
             setPaiementsTrouves(reponse.data);
             console.log("Paiement:", reponse.data)
@@ -79,7 +80,8 @@ const ListePaiement: React.FC = () => {
 
     const confirmerSuppressionPaiement = async (num_facture: number) => {
         try {
-            await axios.delete(`http://localhost:4000/paiement/supprimer/${num_facture}`);
+            await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/paiement/supprimer/${num_facture}`);
+            // await axios.delete(`http://localhost:4000/paiement/supprimer/${num_facture}`);
 
             await afficherPaiements();
 

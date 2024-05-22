@@ -34,7 +34,8 @@ const ListeModules: React.FC = () => {
 
   const afficherModules = async () => {
     try {
-      const reponse = await axios.get<Module[]>("http://localhost:4000/module");
+      const reponse = await axios.get<Module[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module`);
+      // const reponse = await axios.get<Module[]>("http://localhost:4000/module");
       setModules(reponse.data);
       setModulesTrouve(reponse.data);
     } catch (error) {
@@ -55,7 +56,8 @@ const ListeModules: React.FC = () => {
 
   const handleSupprimerModule = async (codeModule: number) => {
     const code_module = codeModule;
-    const reponse = await axios.get(`http://localhost:4000/module/${code_module}`);
+    const reponse = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module/${code_module}`);
+    // const reponse = await axios.get(`http://localhost:4000/module/${code_module}`);
     const Module = reponse.data;
     setCodeFormation(Module.code_formation);
     setEtatConfirmation({
@@ -67,16 +69,19 @@ const ListeModules: React.FC = () => {
   const confirmerSuppressionModule = async (code_module: number) => {
     try {
       if (code_module) {
-        const presenceEtape = await axios.get(`http://localhost:4000/etape/nombre_par_module/${code_module}`);
+        const presenceEtape = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/etape/nombre_par_module/${code_module}`);
+        // const presenceEtape = await axios.get(`http://localhost:4000/etape/nombre_par_module/${code_module}`);
         console.log('presenceEtape: ', presenceEtape.data.count);
         const pEtape = presenceEtape.data.count;
 
         if (pEtape !== 0) {
-          await axios.delete(`http://localhost:4000/etape/supprimer/par_module/${code_module}`);
+          await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/etape/supprimer/par_module/${code_module}`);
+          // await axios.delete(`http://localhost:4000/etape/supprimer/par_module/${code_module}`);
         }
       }
       
-      await axios.delete(`http://localhost:4000/module/supprimer/${code_module}`);
+      await axios.delete(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module/supprimer/${code_module}`);
+      // await axios.delete(`http://localhost:4000/module/supprimer/${code_module}`);
 
       await afficherModules();
 
@@ -88,12 +93,14 @@ const ListeModules: React.FC = () => {
       });
 
       
-      const cout_actuelle_formation = await axios.get(`http://localhost:4000/module/somme_cout_par_formation/${code_formation}`);
+      const cout_actuelle_formation = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module/somme_cout_par_formation/${code_formation}`);
+      // const cout_actuelle_formation = await axios.get(`http://localhost:4000/module/somme_cout_par_formation/${code_formation}`);
       console.log('Coup actuel', cout_actuelle_formation.data);
 
       const cout_formation_ = await cout_actuelle_formation.data;
 
-      const infoF = await axios.get(`http://localhost:4000/formation/${code_formation}`)
+      const infoF = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/${code_formation}`)
+      // const infoF = await axios.get(`http://localhost:4000/formation/${code_formation}`)
         .catch(error => {
           console.error('Erreur lors de la récupération des informations sur la formation :', error);
           throw error;
@@ -113,7 +120,8 @@ const ListeModules: React.FC = () => {
 
         setInfoFormation(newInfoFormation);
 
-        axios.put(`http://localhost:4000/formation/modifier/${code_formation}`, newInfoFormation);
+        axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/formation/modifier/${code_formation}`, newInfoFormation);
+        // axios.put(`http://localhost:4000/formation/modifier/${code_formation}`, newInfoFormation);
 
         return newInfoFormation;
       });

@@ -36,7 +36,7 @@ const TableauDeBordFormateur: React.FC = () => {
   }
 
   return (
-    <div className="tableau-de-bord-base">
+    <div className="tableau-de-bord-base overflow-y-scoll">
       <div className="top-bloc">
 
         <button

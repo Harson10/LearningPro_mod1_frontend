@@ -21,7 +21,8 @@ const ListeModules: React.FC = () => {
 
   const afficherModules = async () => {
     try {
-      const reponse = await axios.get<Module[]>("http://localhost:4000/module/publique");
+      const reponse = await axios.get<Module[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module/publique`);
+      // const reponse = await axios.get<Module[]>("http://localhost:4000/module/publique");
       setModules(reponse.data);
       setModulesTrouve(reponse.data);
       console.log("resDataTestModule", reponse.data);
@@ -52,7 +53,8 @@ const ListeModules: React.FC = () => {
   const handleAfficherContenu = async (codeFormation: number, codeModule: number) => {
     const code_formation = codeFormation;
     const code_module = codeModule;
-    const reponse = await axios.get(`http://localhost:4000/paiement/formation-utilisateur/${code_formation}/${code_utilisateur}`);
+    const reponse = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/paiement/formation-utilisateur/${code_formation}/${code_utilisateur}`);
+    // const reponse = await axios.get(`http://localhost:4000/paiement/formation-utilisateur/${code_formation}/${code_utilisateur}`);
     console.log("repAfficherFormationUtilisateur: ", reponse.data);
 
     if (reponse.data !== 0) {

@@ -23,7 +23,8 @@ const AjoutEtapeContenu: React.FC = () => {
   const [showConfirmationDialog, setShowConfirmationDialog] = useState<boolean>(false);
 
   useEffect(() => {
-    axios.get<Module[]>('http://localhost:4000/module/')
+    axios.get<Module[]>(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/module/`)
+    // axios.get<Module[]>('http://localhost:4000/module/')
       .then(response => {
         if (response.data && Array.isArray(response.data)) {
           setModules(response.data);
@@ -54,7 +55,8 @@ const AjoutEtapeContenu: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:4000/etape/creer', formData, {
+      const response = await axios.post(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/etape/creer`, formData, {
+        // const response = await axios.post('http://localhost:4000/etape/creer', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

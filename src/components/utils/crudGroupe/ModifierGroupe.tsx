@@ -16,7 +16,8 @@ const ModifierGroupe = () => {
   useEffect(() => {
     const afficherGroupe = async () => {
       try {
-        const reponse = await axios.get(`http://localhost:4000/groupe/${code_groupe}`);
+        const reponse = await axios.get(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/groupe/${code_groupe}`);
+        // const reponse = await axios.get(`http://localhost:4000/groupe/${code_groupe}`);
         const Groupe = reponse.data;
         setInfoGroupe(Groupe);
       } catch (error) {
@@ -44,7 +45,8 @@ const ModifierGroupe = () => {
     setShowConfirmationDialog(false);
 
     try {
-      const reponse = await axios.put(`http://localhost:4000/groupe/modifier/${code_groupe}`, infoGroupe);
+      const reponse = await axios.put(`http://${process.env.REACT_APP_ADR_IP_PC_SERVEUR}:4000/groupe/modifier/${code_groupe}`, infoGroupe);
+      // const reponse = await axios.put(`http://localhost:4000/groupe/modifier/${code_groupe}`, infoGroupe);
 
       console.log('groupe mis à jour : ', reponse.data);
       window.history.back();
