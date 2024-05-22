@@ -73,7 +73,7 @@ const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({ onRoleAPI }) 
       </div>
 
       <form className="formulaireConnexion absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-[90%] lg:w-1/3  h-[60%]  pt-[8%] lg:pt-2 text-center items-center justify-around rounded-[30px] shadow-md shadow-gray-900">
-        <h1 className="titre_connexion relative  text-center">Connexion</h1>
+        <h1 className="titre_connexion text-center">Connexion</h1>
         <input
           type="text"
           placeholder="Nom"

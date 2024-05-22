@@ -44,9 +44,9 @@ const ParticipantB: React.FC = () => {
           </div>
         </div>
 
-        <div className="bouton_deconnexion" onClick={handleDeconnexion}>
-          <div className="pl-4">Se déconnecter</div>
-          <div className="pl-4 pr-4"><FaSignOutAlt /></div>
+        <div className="bouton_deconnexion hover:scale-110" onClick={handleDeconnexion}>
+          <div className="pl-4 hidden lg:block">Se déconnecter</div>
+          <div className="pl-4 pr-4 text-2xl lg:text-base"><FaSignOutAlt /></div>
         </div>
       </div>
 

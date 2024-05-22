@@ -5,7 +5,7 @@ import { FaArrowLeft, FaPlus } from "react-icons/fa";
 import Validation from "../../Validation";
 
 
-const  FormulaireGroupe: React.FC = () => {
+const FormulaireGroupe: React.FC = () => {
   const [nomGroupe, setNomGroupe] = useState('');
   const [popupStyle, setPopupStyle] = useState<string>("hide");
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
@@ -41,13 +41,15 @@ const  FormulaireGroupe: React.FC = () => {
 
 
   return (
-    <div className="form_groupe_creation">
+    <div className="form_groupe_creation relative w-screen h-screen box-border m-0 pb-8 text-center justify-center bg-cover bg-fixed bg-no-repeat bg-center font-sans overflow-y-scroll">
 
-      <div className="retour_tBord">
-          <button className="flex p-[13px]" onClick={ () => window.history.back() }>
-            <div className="pl-12">Retour</div>
-            <div className="p-[3px] pl-4"><FaArrowLeft /></div>
+      <div className="relative w-full h-[10%]" onClick={() => window.history.back()} >
+        <div className="flex relative w-full z-20">
+          <button className="retour_acceuil absolute px-0 w-[180px] top-[9px] left-[10px] h-[35px] lg:px-8 lg:w-[250px] lg:top-[12.25px] lg:left-[30px] lg:h-[50px] rounded-[30px] text-white font-bold shadow-md shadow-gray-700 border-2 border-white flex items-center hover:bg-green-700">
+            <div className="pl-4">Retour à l'acceuil</div>
+            <div className="p-[4px] pl-3"><FaArrowLeft /></div>
           </button>
+        </div>
       </div>
 
       <div className={popupStyle}>
@@ -55,21 +57,19 @@ const  FormulaireGroupe: React.FC = () => {
         <p>Erreur lors de la création</p>
       </div>
 
-      <form className="FormulaireCreerGroupe h-screen overflow-hidden" onSubmit={handleInput}>
-        <h1 className="titre_creation_gorupe">Nouveau groupe</h1>
+      <form className="FormulaireCreerGroupe absolute top-[12.5%] left-1/2 transform -translate-x-1/2 flex flex-col w-[90%] lg:w-1/3  h-[40%]  pt-[8%] lg:pt-2 text-center items-center justify-around rounded-[30px] shadow-md shadow-gray-900" onSubmit={handleInput}>
+        <h1 className="titre_creation_gorupe text-center">Nouveau groupe</h1>
         <input
           type="text"
           placeholder='Saissisez le nom du groupe'
           value={nomGroupe}
           onChange={(e) => setNomGroupe(e.target.value)}
         />
-
-        <div className="boutton_inscription">
-          <button type="submit" className="flex">
-            <div className="pl-4">Créer</div>
-            <div className="text-4xs p-[5px] pl-4 pr-4"><FaPlus /></div>
-          </button>
-        </div>
+        
+        <button type="submit" className="boutton_inscription cursor-pointer justify-center w-4/5 h-auto p-2 m-0 mx-2 text-base flex items-center transition duration-300 border border-white rounded-[30px] font-sans text-white z-20 mb-[5%]" >
+          <div className="pl-4">Créer</div>
+          <div className="pl-4 pr-4"><FaPlus /></div>
+        </button>
       </form>
 
       <Validation

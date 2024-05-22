@@ -105,22 +105,24 @@ const FormulaireModifPaiement: React.FC = () => {
 
 
   return (
-    <div className="form_inscription">
+    <div className="form_inscription relative w-screen h-screen box-border m-0 pb-8 text-center justify-center bg-cover bg-fixed bg-no-repeat bg-center font-sans overflow-y-scroll">
 
-      <div className="retour_tabBord" onClick={() => window.history.back()} >
-        <button className="flex p-[13px]">
-          <div className="pl-12">Retour</div>
-          <div className="p-[3px] pl-4"><FaArrowLeft /></div>
-        </button>
+      <div className="relative w-full h-[10%]" onClick={() => window.history.back()} >
+        <div className="flex relative w-full z-20">
+          <button className="retour_acceuil absolute px-0 w-[180px] top-[9px] left-[10px] h-[35px] lg:px-8 lg:w-[250px] lg:top-[12.25px] lg:left-[30px] lg:h-[50px] rounded-[30px] text-white font-bold shadow-md shadow-gray-700 border-2 border-white flex items-center hover:bg-green-700">
+            <div className="pl-4">Retour à l'acceuil</div>
+            <div className="p-[4px] pl-3"><FaArrowLeft /></div>
+          </button>
+        </div>
       </div>
 
       <div className={popupStyle}>
-        <h3>L'enregistrement de paiemnet est un echec!!</h3>
+        <h3>L'inscription est un echec!!</h3>
         <p>Erreur lors de la création</p>
       </div>
 
-      <form className="formulaireInscription overflow-hidden" onSubmit={handleSoumissionForm}>
-        <h1 className="titre_inscription">Paiement</h1>
+      <form className="formulaireInscription  absolute top-[12.5%] left-1/2 transform -translate-x-1/2 flex flex-col w-[90%] lg:w-1/3  h-[100%]  pt-[8%] lg:pt-2 text-center items-center justify-around rounded-[30px] shadow-md shadow-gray-900" onSubmit={handleSoumissionForm}>
+        <h1 className="titre_inscription text-center">Paiement</h1>
 
         <div className="z-20">
           <DatePicker
@@ -182,12 +184,11 @@ const FormulaireModifPaiement: React.FC = () => {
           readOnly
         />
 
-        <div className="w-[80%] h-auto p-[8px] flex flex-center b_inscription">
-          <button type="submit" className="flex items-center">
-            <div className="pl-4">Enregistrer</div>
-            <div className="text-4xs p-[5px] pl-4 pr-4"><FaPlus /></div>
-          </button>
-        </div>
+        <button type="submit" className="boutton_modification_utilisateur cursor-pointer justify-center w-4/5 h-auto p-2 m-0 mx-2 text-base flex items-center transition duration-300 border border-white rounded-[30px] font-sans text-white z-20 mb-[5%]">
+          <div className="pl-4">Enregistrer</div>
+          <div className="text-4xs p-[5px] pl-4 pr-4"><FaPlus /></div>
+        </button>
+
       </form>
 
 

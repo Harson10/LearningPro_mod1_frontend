@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/InfoSuppParticipant.css";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaUserPlus } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Validation from "../../Validation";
@@ -74,7 +74,7 @@ const InfoSuppParticipant: React.FC = () => {
             niveau: niveau,
             diplome: diplome,
             code_groupe: choixGroupe,
-            code_utilisateur: dernierCodeUtilisateur 
+            code_utilisateur: dernierCodeUtilisateur
         };
 
         try {
@@ -94,16 +94,19 @@ const InfoSuppParticipant: React.FC = () => {
     }
 
     return (
-        <div className="form_info_supp">
-            <div className="retour">
-                <button onClick={() => {
-                    window.history.back();
-                    const code_utilisateur = dernierCodeUtilisateur;
-                    axios.delete(`http://localhost:4000/utilisateur/supprimer/${code_utilisateur}`);
-                }} className="flex p-[13px]">
-                    <div className="pl-12">Retour</div>
-                    <div className="p-[3px] pl-4"><FaArrowLeft /></div>
-                </button>
+        <div className="form_info_supp  relative w-screen h-screen box-border m-0 pb-8 text-center justify-center bg-cover bg-fixed bg-no-repeat bg-center font-sans overflow-y-scroll">
+
+            <div className="relative w-full h-[10%]" onClick={() => {
+                window.history.back();
+                const code_utilisateur = dernierCodeUtilisateur;
+                axios.delete(`http://localhost:4000/utilisateur/supprimer/${code_utilisateur}`);
+            }}>
+                <div className="flex relative w-full z-20">
+                    <button className="retour absolute px-0 w-[180px] top-[9px] left-[10px] h-[35px] lg:px-8 lg:w-[250px] lg:top-[12.25px] lg:left-[30px] lg:h-[50px] rounded-[30px] text-white font-bold shadow-md shadow-gray-700 border-2 border-white flex items-center hover:bg-green-700">
+                        <div className="pl-12">Retour</div>
+                        <div className="p-[3px] pl-4"><FaArrowLeft /></div>
+                    </button>
+                </div>
             </div>
 
             <div className={popupStyle}>
@@ -111,7 +114,7 @@ const InfoSuppParticipant: React.FC = () => {
                 <p>Erreur lors de la création</p>
             </div>
 
-            <form className="formulaireParticipant h-screen overflow-hidden" onSubmit={handleAjoutInfoParticipant}>
+            <form className="formulaireParticipant absolute top-[12.5%] left-1/2 transform -translate-x-1/2 flex flex-col w-[90%] lg:w-1/3  h-[100%]  pt-[8%] lg:pt-2 text-center items-center justify-around rounded-[30px] shadow-md shadow-gray-900" onSubmit={handleAjoutInfoParticipant}>
                 <h1 className="titre_info">Participant</h1>
                 <h1 className="text-xl">Informations supplémentaires</h1>
 
@@ -184,12 +187,11 @@ const InfoSuppParticipant: React.FC = () => {
                     ))}
                 </select>
 
-
-                <div className="boutton_info_supp_utilisateur">
-                    <button type="submit" className="flex">
-                        <div className="pl-4">Créer le participant</div>
-                    </button>
-                </div>
+                <button type="submit" className="boutton_info_supp_utilisateur cursor-pointer justify-center w-4/5 h-auto p-2 m-0 mx-2 text-base flex items-center transition duration-300 border border-white rounded-[30px] font-sans text-white z-20 mb-[5%]">
+                    <div className="pl-4">Valider l'inscription</div>
+                    <div className="text-4xs p-[5px] pl-4 pr-4"><FaUserPlus /></div>
+                </button>
+                
             </form>
 
             <Validation

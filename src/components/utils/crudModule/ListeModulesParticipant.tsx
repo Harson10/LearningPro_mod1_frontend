@@ -64,8 +64,8 @@ const ListeModules: React.FC = () => {
 
   return (
     <div className="mt-[50px]">
-      <div className="">
-        <div><h2 className="text-2xl font-bold mb-4 ml-[40%]">Listes des modules</h2></div>
+      <div className="flex flex-col items-center">
+        <div><h2 className="text-2xl font-bold mb-4 ">Listes des modules</h2></div>
       </div>
 
       <div className="flex flex-col lg:flex-row mb-5 w-full lg:w-[95%] items-center justify-center">

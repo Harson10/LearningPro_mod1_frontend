@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../styles/FormulaireInscription.css";
+import "../../styles/Form_Modif_Groupe.css";
 import { useNavigate } from "react-router";
 import { FaArrowLeft, FaUserPlus } from "react-icons/fa";
 import Validation from "../../Validation";
@@ -104,10 +105,10 @@ const FormulaireInscription: React.FC = () => {
 
 
   return (
-    <div className="form_inscription  flex relative w-screen h-screen box-border m-0 text-center justify-center items-center bg-cover bg-fixed bg-no-repeat bg-center font-sans">
+    <div className="form_inscription relative w-screen h-screen box-border m-0 pb-8 text-center justify-center bg-cover bg-fixed bg-no-repeat bg-center font-sans overflow-y-scroll">
 
-      <div className="absolute w-full h-full bg-transparent" onClick={() => window.history.back()} >
-        <div className="flex relative w-full h-[50px] lg:h-[75px] z-20">
+      <div className="relative w-full h-[10%]" onClick={() => window.history.back()} >
+        <div className="flex relative w-full z-20">
           <button className="retour_acceuil absolute px-0 w-[180px] top-[9px] left-[10px] h-[35px] lg:px-8 lg:w-[250px] lg:top-[12.25px] lg:left-[30px] lg:h-[50px] rounded-[30px] text-white font-bold shadow-md shadow-gray-700 border-2 border-white flex items-center hover:bg-green-700">
             <div className="pl-4">Retour à l'acceuil</div>
             <div className="p-[4px] pl-3"><FaArrowLeft /></div>
@@ -120,8 +121,8 @@ const FormulaireInscription: React.FC = () => {
         <p>Erreur lors de la création</p>
       </div>
 
-      <form className="formulaireInscription overflow-hidden" onSubmit={handleInscription}>
-        <h1 className="titre_inscription">Inscription</h1>
+      <form className="formulaireInscription  absolute top-[12.5%] left-1/2 transform -translate-x-1/2 flex flex-col w-[90%] lg:w-1/3  h-[100%]  pt-[8%] lg:pt-2 text-center items-center justify-around rounded-[30px] shadow-md shadow-gray-900" onSubmit={handleInscription}>
+        <h1 className="titre_inscription text-center">Inscription</h1>
         <input
           type="text"
           placeholder='Saissisez un nom*'
@@ -192,13 +193,20 @@ const FormulaireInscription: React.FC = () => {
             )}
         </select>
 
-        <div className="w-[80%] h-auto p-[8px] flex flex-center b_inscription">
-          <button type="submit" className="flex items-center">
-            <div className="pl-4">Inscrire l'utilisateur</div>
-            <div className="text-4xs p-[5px] pl-4 pr-4"><FaUserPlus /></div>
-          </button>
-        </div>
+        {/* <div className="b_inscription box-border w-4/5 h-auto transition duration-300 border border-white rounded-[30px] font-sans text-white z-20 mb-[5%]">
+          <button type="submit" className="boutton_modification_utilisateur cursor-pointer justify-center w-4/5 h-auto p-2 m-0 mx-2 text-base flex items-center transition duration-300 border border-white rounded-[30px] font-sans text-white z-20 mb-[5%]">
+          <div className="pl-4">Inscrire l'utilisateur</div>
+          <div className="text-4xs p-[5px] pl-4 pr-4"><FaUserPlus /></div>
+        </button>
+        </div> */}
+
+        <button type="submit" className="boutton_modification_utilisateur cursor-pointer justify-center w-4/5 h-auto p-2 m-0 mx-2 text-base flex items-center transition duration-300 border border-white rounded-[30px] font-sans text-white z-20 mb-[5%]">
+          <div className="pl-4">Inscrire l'utilisateur</div>
+          <div className="text-4xs p-[5px] pl-4 pr-4"><FaUserPlus /></div>
+        </button>
+
       </form>
+
 
       <Validation
         isOpen={showConfirmationDialog}
