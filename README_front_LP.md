@@ -15,56 +15,63 @@
     yarn install
     ```
 
+## Creation de la variable pour contenir l'adresse IP du PC serveur
+
+3. Créez le fichier ".env" à la racine du projet au meme niveau que le "package.json" et modifiez son contenu avec :
+    ```bash
+    REACT_APP_ADR_IP_PC_SERVEUR=192.168.*.* 
+    ```
+
 ## Démarrage du Serveur Front-End
 
-3. Une fois les paquets installés, lancez le serveur en tapant dans votre terminal :
+4. Une fois les paquets installés, lancez le serveur en tapant dans votre terminal :
     ```bash
     yarn start
     ```
 
    Assurez-vous d'avoir préalablement lancé le serveur du backend.
 
-4. Votre navigateur devrait s'ouvrir automatiquement. Sinon, ouvrez-le et accédez à l'URL :
+5. Votre navigateur devrait s'ouvrir automatiquement. Sinon, ouvrez-le et accédez à l'URL :
     ```
-    http://localhost:3000
+    http://{REACT_APP_ADR_IP_PC_SERVEUR}:3000
     ```
 
-5. Vous accédez ensuite à la page d'accueil.
+6. Vous accédez ensuite à la page d'accueil.
 
 
 ## Connexion à l'Application
 
-6. Cliquez sur "Se Connecter", entrez vos informations de connexion, puis validez.
+7. Cliquez sur "Se Connecter", entrez vos informations de connexion, puis validez.
 
 
 ## Gestion des Groupes
 
-7. Cliquez sur l'onglet "Gérer les Groupes" pour créer des groupes en vue de l'inscription des participants.
+8. Cliquez sur l'onglet "Gérer les Groupes" pour créer des groupes en vue de l'inscription des participants.
 
 
 ## Création d'Utilisateurs (Administrateur)
 
-8. En tant qu'administrateur, créez des utilisateurs dans l'onglet "Gérer les Utilisateurs".
+9. En tant qu'administrateur, créez des utilisateurs dans l'onglet "Gérer les Utilisateurs".
 
-9. Un administrateur peut créer les 3 niveaux d'utilisateur (Administrateur, Formateur, Participant).
+10. Un administrateur peut créer les 3 niveaux d'utilisateur (Administrateur, Formateur, Participant).
 
 
 ## Création d'Utilisateurs (Formateur)
 
-10. Un formateur peut créer uniquement des participants.
+11. Un formateur peut créer uniquement des participants.
 
-11. Lors de l'inscription d'un participant par un administrateur ou un formateur, un formulaire supplémentaire apparaîtra pour ajouter tous ses informations.
+12. Lors de l'inscription d'un participant par un administrateur ou un formateur, un formulaire supplémentaire apparaîtra pour ajouter tous ses informations.
 
 
 ## Test avec un Utilisateur Différent
 
-12. Pour tester un autre utilisateur, commencez par vous déconnecter et connectez-vous sur un compte formateur.
+13. Pour tester un autre utilisateur, commencez par vous déconnecter et connectez-vous sur un compte formateur.
 
-13. Créez une formation avant de créer les modules.
+14. Créez une formation avant de créer les modules.
 
-14. Enregistrez ensuite les "paiements" dans l'onglet correspondant pour pouvoir manipuler les contenus dans l'onglet "Publication".
+15. Enregistrez ensuite les "paiements" dans l'onglet correspondant pour pouvoir manipuler les contenus dans l'onglet "Publication".
 
-15. Les participants n'auront accès qu'aux formations où ils sont inscrits.
+16. Les participants n'auront accès qu'aux formations où ils sont inscrits.
 
 
-Ceci conclut le guide d'utilisation du front-end. Pour toute question, veuillez contacter l'équipe de développement.
+Ceci conclut le guide d'utilisation du front-end. Pour toute question, veuillez contacter le développeur concerné.
