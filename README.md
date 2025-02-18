@@ -4,28 +4,28 @@
 
 1. Clonez le projet depuis GitHub :
     ```bash
-    git clone https://github.com/Etablissement-Ralaivao/LearningPro_mod1_frontend.git
+    git clone https://github.com/Harson10/LearningPro_mod1_frontend.git
     cd votre-projet-frontend
     ```
 
 ## Installation des Dépendances
 
 2. Installez les dépendances avec Yarn :
-    ```bash
+    ```
     yarn install
     ```
 
 ## Creation de la variable pour contenir l'adresse IP du PC serveur
 
 3. Créez le fichier ".env" à la racine du projet au meme niveau que le "package.json" et modifiez son contenu avec :
-    ```bash
+    ```
     REACT_APP_ADR_IP_PC_SERVEUR=192.168.*.* 
     ```
 
 ## Démarrage du Serveur Front-End
 
 4. Une fois les paquets installés, lancez le serveur en tapant dans votre terminal :
-    ```bash
+    ```
     yarn start
     ```
 
